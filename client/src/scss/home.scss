@@ -1,0 +1,74 @@
+@import "variables.scss";
+
+.preloadAnimation {
+  margin-top: 130px;
+}
+
+#profiles {
+  margin-top: -50px;
+  margin-bottom: 10px;
+  float: right;
+  max-width: 380px;
+  text-align: center;
+  font-size: 12px;
+
+  .icon {
+    display: inline-block;
+    width: 50px;
+    padding: 0 5px;
+    margin: 0 5px;
+
+    img {
+      height: 30px;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .container > h1 {
+    margin-top: 60px !important;
+    margin-bottom: 20px;
+  }
+
+  #profiles {
+    margin: 0;
+    float: none;
+    max-width: 100%;
+
+    .icon {
+      img {
+        height: 25px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #profiles {
+    .icon {
+      img {
+        height: 15px;
+      }
+    }
+  }
+}
+
+#vueJS {
+  text-align: center;
+  pointer-events: none;
+}
+
+#vueJS a img {
+  box-shadow: 5px 5px 15px 2px #888888 !important;
+}
+
+#vueJS-here {
+  display: block;
+  margin: auto;
+}
+
+.site-versions p {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
