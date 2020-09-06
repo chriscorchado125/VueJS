@@ -7,62 +7,70 @@
     >
       <div>
         <img
-          alt="HTML5 Icon"
-          title="This site uses HTML5"
-          src="https://chriscorchado.com/images/html5.jpg"
-        />
-      </div>
-      <div>
-        <img
-          alt="SASS Icon"
-          title="This site uses SASS"
-          src="https://chriscorchado.com/images/sass.png"
-        />
-      </div>
-      <div>
-        <img
-          alt="TypeScript Icon"
-          title="This site uses TypeScript"
-          src="https://chriscorchado.com/images/typescript.png"
-        />
-      </div>
-      <div>
-        <img
-          alt="Vue js Icon"
-          title="This site uses Vue js"
+          alt="VueJS Icon"
+          title="VueJS for the frontend framework"
           src="https://chriscorchado.com/images/vuejs.png"
         />
       </div>
       <div>
         <img
           alt="nodeJS Icon"
-          title="This site uses nodeJS"
+          title="nodeJS for the platform"
           src="https://chriscorchado.com/images/nodejs.png"
         />
       </div>
       <div>
         <img
           alt="Express Icon"
-          title="This site uses Express"
+          title="Express for the backend framework"
           src="https://chriscorchado.com/images/express.png"
         />
       </div>
       <div>
         <img
           alt="mongoDB Icon"
-          title="This site uses mongoDB"
+          title="mongoDB for the database"
           src="https://chriscorchado.com/images/mongodb.png"
         />
       </div>
       <div>
         <img
           alt="mongoose Icon"
-          title="This site uses mongoose"
+          title="mongoose to connect to the mongoDB database"
           src="https://chriscorchado.com/images/mongoose.png"
         />
       </div>
+
       <div>
-        <a href="https://github.com/chriscorchado125/Vue" target="_blank">
+        <img
+          alt="TypeScript Icon"
+          title="TypeScript for Javascript functionality"
+          src="https://chriscorchado.com/images/typescript.png"
+        />
+      </div>
+      <div>
+        <img
+          alt="SASS Icon"
+          title="SASS for the CSS look and feel styles"
+          src="https://chriscorchado.com/images/sass.png"
+        />
+      </div>
+      <div>
+        <img
+          alt="Pug Icon"
+          title="Pug for the HTML content templates"
+          src="https://chriscorchado.com/images/pugjs.png"
+        />
+      </div>
+      <div>
+        <img
+          alt="HTML5 Icon"
+          title="HTML5 for overall structure"
+          src="https://chriscorchado.com/images/html5.jpg"
+        />
+      </div>
+      <div>
+        <a href="https://github.com/chriscorchado125/VueJS" target="_blank">
           <img
             alt="Github Icon"
             title="View the code on Github"
@@ -74,7 +82,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import Vue from "vue";
+import Component from "vue-class-component";
 
 @Component
 export default class SiteFooter extends Vue {}

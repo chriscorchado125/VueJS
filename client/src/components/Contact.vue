@@ -13,7 +13,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import Vue from "vue";
+import Component from "vue-class-component";
 import ContactService from "./../services/ContactService";
 
 @Component
@@ -24,6 +25,8 @@ export default class Contact extends Vue {
   async created() {
     try {
       this.data = await ContactService.getContact();
+      this.$store.commit("setRecordCount", 1);
+
     } catch (err) {
       this.error = err.message;
     }
@@ -37,9 +40,10 @@ export default class Contact extends Vue {
     // get the contact form JavaScript
     const scriptString =
       '<script type="application/json" data-drupal-selector="drupal-settings-json">';
+
     let script = data.substr(data.indexOf(scriptString), data.indexOf("><\/script>"));
     script = script.substr(0, script.indexOf("<\/script>") + 9);
-    console.log(script);
+
     return `${form} ${script}`;
   }
 }

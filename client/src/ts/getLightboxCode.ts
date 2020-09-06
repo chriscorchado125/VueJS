@@ -4,9 +4,9 @@
 const getLightbox = () => {
   const scripts = [
     "https://code.jquery.com/jquery-3.5.0.min.js",
+    "//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js",
     "//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js",
-    "//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js",
-    "//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"
+    "//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js"
   ];
 
   scripts.forEach((script) => {

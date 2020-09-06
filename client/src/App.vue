@@ -1,5 +1,7 @@
 <template>
   <div id="app">
-    <router-view />
+    <keep-alive include="[History, Course, Project]">
+      <router-view />
+    </keep-alive>
   </div>
 </template>

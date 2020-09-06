@@ -7,7 +7,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import Vue from "vue";
+import Component from "vue-class-component";
 import HomeService from "./../services/HomeService";
 
 @Component
@@ -18,15 +19,10 @@ export default class Home extends Vue {
   async created() {
     try {
       this.data = await HomeService.getHome();
+      this.$store.commit("setRecordCount", this.data.length);
     } catch (err) {
       this.error = err.message;
     }
-  }
-
-  setVersion() {
-    //const el = document.getElementById("vueJS");
-    //el.classList.add("shadow-version noLink");
-    //document.getElementById("vueJS-here").style.display = "block";
   }
 }
 </script>

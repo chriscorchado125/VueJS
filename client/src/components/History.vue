@@ -9,26 +9,27 @@
 
     div.container.company
 
-      div.company-container.col.shadow(v-for="items in data" :key="items._id")
+      div.company-container.col.shadow(v-for="item in data" :key="item._id")
 
-        div.company-name {{ items.history.name }}
+        div.company-name {{ item.history.name }}
 
-        div.company-job-title {{ items.history.job_title }}
+        div.company-job-title {{ item.history.job_title }}
 
-        div.body-container(v-html="items.history.description")
+        div.body-container(v-html="item.history.description")
 
         div.screenshot-container
 
-          img(loading=lazy :src="items.history.screenshots" class="company-screenshot" :alt="items.history.name")
+          img(loading=lazy :src="item.history.screenshots" class="company-screenshot" :alt="item.history.name")
 
-          div.employment-dates(v-if="items.history.end_date") {{ formatDate(items.history.start_date) }} -  {{ formatDate(items.history.end_date) }}
+          div.employment-dates(v-if="item.history.end_date") {{ formatDate(item.history.start_date) }} -  {{ formatDate(item.history.end_date) }}
 
-          div.employment-dates(v-else="items.history.end_date") {{ formatDate(items.history.start_date) }} -  null
+          div.employment-dates(v-else="item.history.end_date") {{ formatDate(item.history.start_date) }} -  null
 
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import Vue from "vue";
+import Component from "vue-class-component";
 import HistoryService from "./../services/HistoryService";
 import getMonthYear from "./../ts/getMonthYear";
 
@@ -42,6 +43,8 @@ export default class History extends Vue {
   async created() {
     try {
       this.data = await HistoryService.getHistory(params.get("q"));
+      this.$store.commit("setRecordCount", this.data.length);
+      this.$store.commit("setUserRecordCount");
     } catch (err) {
       this.error = err.message;
     }
