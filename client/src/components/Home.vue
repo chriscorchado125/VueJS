@@ -1,9 +1,13 @@
 <template lang="pug">
+
   main.container(role="main")
     h1 About Me
+
     if error
       p #{ error }
-    span(v-html="data[0].home.description")
+
+    span(v-html="this.data[0].home.description")
+    
 </template>
 
 <script lang="ts">
@@ -19,7 +23,7 @@ export default class Home extends Vue {
   async created() {
     try {
       this.data = await HomeService.getHome();
-      this.$store.commit("setRecordCount", this.data.length);
+      this.$store.commit("setRecords", this.data);
     } catch (err) {
       this.error = err.message;
     }

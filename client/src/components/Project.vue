@@ -1,7 +1,9 @@
 <template lang="pug">
   main.container(role="main")
 
-    h1 Projects 
+    div#noRecords(v-if="this.data.length == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
+
+    h1(v-else) Projects 
     
     if error
       p #{ error }
@@ -53,8 +55,7 @@ export default class Project extends Vue {
   async created() {
     try {
       this.data = await ProjectService.getProject(params.get("q"));
-      this.$store.commit("setRecordCount", this.data.length);
-      this.$store.commit("setUserRecordCount");
+      this.$store.commit("setRecords", this.data);
       getLightboxCode();
     } catch (err) {
       this.error = err.message;

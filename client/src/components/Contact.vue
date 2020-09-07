@@ -25,8 +25,7 @@ export default class Contact extends Vue {
   async created() {
     try {
       this.data = await ContactService.getContact();
-      this.$store.commit("setRecordCount", 1);
-
+      this.$store.commit("setRecords", this.data);
     } catch (err) {
       this.error = err.message;
     }

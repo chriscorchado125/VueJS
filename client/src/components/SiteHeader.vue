@@ -17,7 +17,7 @@
 
           router-link(to="/contact" class="nav-item nav-link" id="contact-link") Contact
 
-        <profile-component v-if='currentRouteName == "Home"' />
+        <profile-component v-if='currentRouteName == "Home" || currentRouteName == "Index"' />
 
         <search-component v-if='pageIsSearchable' />
 
@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Watch } from "vue-property-decorator";
 import Component from 'vue-class-component'
 import SearchComponent from "@/components/Search.vue";
 import ProfileComponent from "@/components/Profile.vue";
@@ -41,13 +42,23 @@ import ProfileComponent from "@/components/Profile.vue";
 
 export default class SiteHeader extends Vue {
 
-  get currentRouteName() {    
+  currentPage = '';
+
+  get currentRouteName() {   
+    this.currentPage = location.href;
     return this.$route.name;
   }
 
   get pageIsSearchable() {
-    if(this.currentRouteName == "Home" || this.currentRouteName == "Contact") return false
+    if(this.currentRouteName == "Index" || this.currentRouteName == "Home"|| this.currentRouteName == "Contact") return false
     return true;
+  }
+  
+  @Watch("currentPage")
+  onPropertyChanged(value: string, oldValue: string) {
+    // TODO add reactivity
+    this.$store.state.search = ''
+    if(value !== oldValue && oldValue) location.href = value;
   }
 }
 </script>

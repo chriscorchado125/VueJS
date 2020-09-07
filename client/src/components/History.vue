@@ -2,7 +2,9 @@
 
   main.container(role="main")
 
-    h1 History
+    div#noRecords(v-if="this.data.length == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
+
+    h1(v-else) History
 
     if error
       p #{ error }
@@ -33,8 +35,6 @@ import Component from "vue-class-component";
 import HistoryService from "./../services/HistoryService";
 import getMonthYear from "./../ts/getMonthYear";
 
-const params = new URLSearchParams(window.location.search);
-
 @Component
 export default class History extends Vue {
   data = [];
@@ -42,9 +42,8 @@ export default class History extends Vue {
 
   async created() {
     try {
-      this.data = await HistoryService.getHistory(params.get("q"));
-      this.$store.commit("setRecordCount", this.data.length);
-      this.$store.commit("setUserRecordCount");
+      this.data = await HistoryService.getHistory(this.$route.query.q);
+      this.$store.commit("setRecords", this.data);
     } catch (err) {
       this.error = err.message;
     }

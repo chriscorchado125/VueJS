@@ -1,8 +1,10 @@
 <template lang="pug">
 
   main.container(role="main")
+  
+    div#noRecords(v-if="this.data.length == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
 
-    h1 Courses
+    h1(v-else) Courses
     
     if error
       p #{ error }
@@ -14,7 +16,7 @@
         h2 {{ item.course.name }}
     
         div        
-          img(loading=lazy :src="item.course.certificate_image" :alt="cleanName(item.course.name)" :title="cleanName(item.course.name) + ' certificate'")
+          img(loading=lazy :src="item.course.certificate_image" :alt="item.course.name" :title="item.course.name + ' certificate'")
 
         div.course-wrapper
 
@@ -38,9 +40,6 @@ import Component from "vue-class-component";
 import CourseService from "./../services/CourseService";
 import getMonthYear from "./../ts/getMonthYear";
 import getLightboxCode from "./../ts/getLightboxCode";
-import getCleanValue from "./../ts/getCleanValue";
-
-const params = new URLSearchParams(window.location.search);
 
 @Component
 export default class Course extends Vue {
@@ -49,17 +48,13 @@ export default class Course extends Vue {
 
   async created() {
     try {
-      this.data = await CourseService.getCourse(params.get("q"));
+      this.data = await CourseService.getCourse(this.$route.query.q);
       this.$store.commit("setRecords", this.data);
-      this.$store.commit("setRecordCount", this.data.length);
-      this.$store.commit("setUserRecordCount");
       getLightboxCode();
     } catch (err) {
       this.error = err.message;
     }
   }
-
-  cleanName = getCleanValue;
 
   getMonthYear = getMonthYear;
 }
@@ -67,6 +62,4 @@ export default class Course extends Vue {
 
 <style scoped lang="scss">
 @import "./../scss/course.scss";
-@import "//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css";
-@import "//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css";
 </style>
