@@ -13,19 +13,19 @@
 
       div.company-container.col.shadow(v-for="item in data" :key="item._id")
 
-        div.company-name {{ item.history.name }}
+        div.company-name(v-html="highlightSearch(item.history.name, query)")
 
-        div.company-job-title {{ item.history.job_title }}
+        div.company-job-title(v-html="highlightSearch(item.history.job_title, query)")
 
-        div.body-container(v-html="item.history.description")
+        div.body-container(v-html="highlightSearch(item.history.description, query)")
 
         div.screenshot-container
 
           img(loading=lazy :src="item.history.screenshots" class="company-screenshot" :alt="item.history.name")
 
-          div.employment-dates(v-if="item.history.end_date") {{ formatDate(item.history.start_date) }} -  {{ formatDate(item.history.end_date) }}
+          div.employment-dates(v-if="item.history.end_date") {{ getMonthYear(item.history.start_date) }} -  {{ getMonthYear(item.history.end_date) }}
 
-          div.employment-dates(v-else="item.history.end_date") {{ formatDate(item.history.start_date) }} -  null
+          div.employment-dates(v-else="item.history.end_date") {{ getMonthYear(item.history.start_date) }} -  null
 
 </template>
 
@@ -34,22 +34,26 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import HistoryService from "./../services/HistoryService";
 import getMonthYear from "./../ts/getMonthYear";
+import highlightSearch from "./../ts/highlightSearch";
 
 @Component
 export default class History extends Vue {
-  data = [];
+  data: Array<object> = [];
   error = "";
+  query = this.$route.query.q || "";
 
   async created() {
     try {
-      this.data = await HistoryService.getHistory(this.$route.query.q);
+      this.data = await HistoryService.getHistory(this.query);
       this.$store.commit("setRecords", this.data);
     } catch (err) {
       this.error = err.message;
     }
   }
 
-  formatDate = getMonthYear;
+  getMonthYear = getMonthYear;
+
+  highlightSearch = highlightSearch;
 }
 </script>
 

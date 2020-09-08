@@ -4,14 +4,16 @@ const mongodb = require("mongodb");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  let search = { $regex: new RegExp(req.query.q, "i") };
+  //
+  const search = { $regex: new RegExp(req.query.q, "i") };
 
-  let queryParams = { name: search };
+  const queryParams = { name: search };
 
   const courses = await loadCourseData();
   res.send(
     await courses
       .find(queryParams, "name certificate_pdf certificate_image track_image course_date")
+      .limit(51)
       .toArray()
   );
 });

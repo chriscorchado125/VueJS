@@ -13,7 +13,7 @@
 
       div.course-box.box(v-for="item in data" :key="item._id")
        
-        h2 {{ item.course.name }}
+        h2(v-html="highlightSearch(item.course.name, query)")
     
         div        
           img(loading=lazy :src="item.course.certificate_image" :alt="item.course.name" :title="item.course.name + ' certificate'")
@@ -40,15 +40,17 @@ import Component from "vue-class-component";
 import CourseService from "./../services/CourseService";
 import getMonthYear from "./../ts/getMonthYear";
 import getLightboxCode from "./../ts/getLightboxCode";
+import highlightSearch from "./../ts/highlightSearch";
 
 @Component
 export default class Course extends Vue {
-  data = [];
+  data: Array<object> = [];
   error = "";
+  query = this.$route.query.q || "";
 
   async created() {
     try {
-      this.data = await CourseService.getCourse(this.$route.query.q);
+      this.data = await CourseService.getCourse(this.query);
       this.$store.commit("setRecords", this.data);
       getLightboxCode();
     } catch (err) {
@@ -57,6 +59,8 @@ export default class Course extends Vue {
   }
 
   getMonthYear = getMonthYear;
+
+  highlightSearch = highlightSearch;
 }
 </script>
 

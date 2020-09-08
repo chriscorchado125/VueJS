@@ -4,9 +4,10 @@ const mongodb = require("mongodb");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  let search = { $regex: new RegExp(req.query.q, "i") };
+  //
+  const search = { $regex: new RegExp(req.query.q, "i") };
 
-  let queryParams = {
+  const queryParams = {
     $or: [
       {
         name: search
@@ -23,6 +24,7 @@ router.get("/", async (req, res) => {
   res.send(
     await history
       .find(queryParams, "name description screenshots job_title start_date end_date")
+      .limit(51)
       .toArray()
   );
 });

@@ -4,9 +4,10 @@ const mongodb = require("mongodb");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  let search = { $regex: new RegExp(req.query.q, "i") };
+  //
+  const search = { $regex: new RegExp(req.query.q, "i") };
 
-  let queryParams = {
+  const queryParams = {
     $or: [
       {
         name: search
@@ -33,6 +34,7 @@ router.get("/", async (req, res) => {
         queryParams,
         "screenshots name description company_name videos technology project_date"
       )
+      .limit(51)
       .toArray()
   );
 });

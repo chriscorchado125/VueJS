@@ -6,7 +6,7 @@
     if error
       p #{ error }
 
-    span(v-html="this.data[0].home.description")
+    span(v-html="this.homeDescription")
     
 </template>
 
@@ -17,13 +17,15 @@ import HomeService from "./../services/HomeService";
 
 @Component
 export default class Home extends Vue {
-  data = [];
+  data: Array<any> = [];
   error = "";
+  homeDescription = "";
 
   async created() {
     try {
       this.data = await HomeService.getHome();
       this.$store.commit("setRecords", this.data);
+      this.homeDescription = this.data[0].home.description;
     } catch (err) {
       this.error = err.message;
     }

@@ -8,7 +8,7 @@
       if error
         p #{ error }
    
-      span(v-html="getForm(data.data)")
+      span(v-html="formHTML")
 
 </template>
 
@@ -19,13 +19,15 @@ import ContactService from "./../services/ContactService";
 
 @Component
 export default class Contact extends Vue {
-  data = [];
+  data: any = [];
   error = "";
+  formHTML = "";
 
   async created() {
     try {
       this.data = await ContactService.getContact();
       this.$store.commit("setRecords", this.data);
+      this.formHTML = this.getForm(this.data.data);
     } catch (err) {
       this.error = err.message;
     }
