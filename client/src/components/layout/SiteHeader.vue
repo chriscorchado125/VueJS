@@ -63,21 +63,21 @@ export default class SiteHeader extends Vue {
   }
 
   setMetaTags() {
-    const titleEl = document.querySelector("head title");
+    const titleEl:any = document.querySelector("head title");
     titleEl.textContent = "Chris Corchado - History - Portfolio and Resume";
 
-    const link = document.createElement("link");
+    const link:any = document.createElement("link");
     link.href = "https://chriscorchado.com/images/chrisCorchado.ico";
     link.rel = "shortcut icon";
     link.type = "image/x-icon";
     document.getElementsByTagName("head")[0].appendChild(link);
 
-    const desc = document.createElement("meta");
+    const desc:any = document.createElement("meta");
     desc.setAttribute("name", "description");
     desc.setAttribute("content", "Chris Corchado - Portfolio and Resume");
     document.getElementsByTagName("head")[0].appendChild(desc);
 
-    const keyword = document.createElement("meta");
+    const keyword:any = document.createElement("meta");
     desc.setAttribute("name", "keywords");
     desc.setAttribute(
       "content",

@@ -31,8 +31,10 @@ export default class Contact extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+  }
 
-    const titleEl = document.querySelector("head title");
+  mounted() {
+    const titleEl: any = document.querySelector("head title");
     titleEl.textContent = "Chris Corchado - Contact Me - Portfolio and Resume";
   }
 

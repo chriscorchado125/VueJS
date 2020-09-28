@@ -24,6 +24,10 @@ body {
   border: 1px dashed $main_color;
 }
 
+.homeSelected {
+  border: 1px dashed $main_color;
+}
+
 .preloadAnimation {
   text-align: center;
   font-size: 34px;
@@ -271,4 +275,19 @@ span.featherlight {
   .container {
     margin-top: -40px;
   }
+}
+
+#vueJS a img {
+  box-shadow: 5px 5px 15px 2px #888888 !important;
+}
+
+#vueJS-here {
+  display: block;
+  margin: auto;
+}
+
+.site-versions p {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-weight: bold;
 }

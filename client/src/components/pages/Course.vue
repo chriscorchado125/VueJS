@@ -61,8 +61,10 @@ export default class Course extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+  }
 
-    const titleEl = document.querySelector("head title");
+  mounted() {
+    const titleEl: any = document.querySelector("head title");
     titleEl.textContent = "Chris Corchado - Courses - Portfolio and Resume";
   }
 

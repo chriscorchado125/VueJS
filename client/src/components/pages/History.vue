@@ -49,8 +49,10 @@ export default class History extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+  }
 
-    const titleEl = document.querySelector("head title");
+  mounted() {
+    const titleEl: any = document.querySelector("head title");
     titleEl.textContent = "Chris Corchado - History - Portfolio and Resume";
   }
 
