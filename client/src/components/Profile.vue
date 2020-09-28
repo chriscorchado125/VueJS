@@ -28,5 +28,5 @@ export default class Profile extends Vue {}
 </script>
 
 <style lang="scss">
-@import "./../scss/profile.scss";
+@import "./../scss/header/profile.scss";
 </style>

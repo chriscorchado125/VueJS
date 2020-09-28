@@ -10,15 +10,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-import SiteHeaderComponent from "@/components/SiteHeader.vue";
-import CourseComponent from "@/components/Course.vue";
-import SiteFooterComponent from "@/components/SiteFooter.vue";
+import SiteHeaderComponent from "@/components/layout/SiteHeader.vue";
+import CourseComponent from "@/components/pages/Course.vue";
+import SiteFooterComponent from "@/components/layout/SiteFooter.vue";
 
 @Component({
   components: {
+    SiteHeaderComponent,
     CourseComponent,
-    SiteFooterComponent,
-    SiteHeaderComponent
+    SiteFooterComponent
   }
 })
 export default class Course extends Vue {}

@@ -1,7 +1,8 @@
 <template lang="pug">
+
   main.container(role="main")
 
-    div#noRecords(v-if="this.data.length == 0 && this.$store.state.search")  No matches found for '{{ query }}'
+    div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{ query }}'
 
     h1(v-else) Projects 
     
@@ -10,11 +11,12 @@
 
     div.project-container
 
-      div.project.col(v-for="item in data" :key="item._id")
+      div.project.col(v-for="item in this.$store.state.pageRecords" :key="item._id")
 
         div.project-title(v-html="highlightSearch(item.project.name, query)")
-
-        div.project-company(v-html="highlightSearch(item.project.company_name, query)") #[span.project-date {{ getMonthYear(item.project.project_date, 'yearOnly') }}]
+  
+        span.project-company(v-html="highlightSearch(item.project.company_name, query)")
+        span.project-date ({{ getMonthYear(item.project.project_date, 'yearOnly') }})
 
         div.body-container(v-html="highlightSearch(item.project.description, query)")
 
@@ -41,16 +43,16 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import ProjectService from "./../services/ProjectService";
-import getMonthYear from "./../ts/getMonthYear";
-import getLightboxCode from "./../ts/getLightboxCode";
-import highlightSearch from "./../ts/highlightSearch";
+import ProjectService from "./../../services/ProjectService";
+import getMonthYear from "./../../ts/getMonthYear";
+import getLightboxCode from "./../../ts/getLightboxCode";
+import highlightSearch from "./../../ts/highlightSearch";
 
 @Component
 export default class Project extends Vue {
   data: Array<object> = [];
   error = "";
-  query = this.$route.query.q || "";
+  query = this.$route.query.q;
 
   async created() {
     try {
@@ -60,6 +62,13 @@ export default class Project extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+
+    const titleEl = document.querySelector("head title");
+    titleEl.textContent = "Chris Corchado - Projects - Portfolio and Resume";
+  }
+
+  beforeUpdate() {
+    this.query = this.$route.query.q;
   }
 
   setScreenshots(item) {
@@ -83,5 +92,5 @@ export default class Project extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "./../scss/project.scss";
+@import "./../../scss/pages/project.scss";
 </style>

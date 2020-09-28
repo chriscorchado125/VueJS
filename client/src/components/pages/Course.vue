@@ -2,7 +2,7 @@
 
   main.container(role="main")
   
-    div#noRecords(v-if="this.data.length == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
+    div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
 
     h1(v-else) Courses
     
@@ -11,7 +11,7 @@
 
     div.container.courses-container.row
 
-      div.course-box.box(v-for="item in data" :key="item._id")
+      div.course-box.box(v-for="item in this.$store.state.pageRecords" :key="item._id")
        
         h2(v-html="highlightSearch(item.course.name, query)")
     
@@ -37,25 +37,37 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import CourseService from "./../services/CourseService";
-import getMonthYear from "./../ts/getMonthYear";
-import getLightboxCode from "./../ts/getLightboxCode";
-import highlightSearch from "./../ts/highlightSearch";
+import CourseService from "./../../services/CourseService";
+import getMonthYear from "./../../ts/getMonthYear";
+import getLightboxCode from "./../../ts/getLightboxCode";
+import highlightSearch from "./../../ts/highlightSearch";
 
 @Component
 export default class Course extends Vue {
   data: Array<object> = [];
   error = "";
-  query = this.$route.query.q || "";
+  query = this.$route.query.q;
+
+  metaInfo: {
+    title: "Default App Title";
+    titleTemplate: "%s | vue-meta Example App";
+  };
 
   async created() {
     try {
-      this.data = await CourseService.getCourse(this.query);
+      this.data = await CourseService.getCourse();
       this.$store.commit("setRecords", this.data);
       getLightboxCode();
     } catch (err) {
       this.error = err.message;
     }
+
+    const titleEl = document.querySelector("head title");
+    titleEl.textContent = "Chris Corchado - Courses - Portfolio and Resume";
+  }
+
+  beforeUpdate() {
+    this.query = this.$route.query.q;
   }
 
   getMonthYear = getMonthYear;
@@ -65,5 +77,5 @@ export default class Course extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "./../scss/course.scss";
+@import "./../../scss/pages/course.scss";
 </style>

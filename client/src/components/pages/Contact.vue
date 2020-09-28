@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import ContactService from "./../services/ContactService";
+import ContactService from "./../../services/ContactService";
 
 @Component
 export default class Contact extends Vue {
@@ -31,6 +31,9 @@ export default class Contact extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+
+    const titleEl = document.querySelector("head title");
+    titleEl.textContent = "Chris Corchado - Contact Me - Portfolio and Resume";
   }
 
   getForm(data) {
@@ -51,5 +54,5 @@ export default class Contact extends Vue {
 </script>
 
 <style lang="scss">
-@import "./../scss/contact.scss";
+@import "./../../scss/pages/contact.scss";
 </style>

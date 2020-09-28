@@ -1,9 +1,8 @@
 <template lang="pug">
 
-  div#search-container(role="search")
+  div#search-container(role="search" :class="containerStyle")
 
-    //span#searchCount(v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
-    span#searchCount() Items 444-444
+    span#searchCount(v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
 
     label
       span.screen-reader Search
@@ -14,16 +13,19 @@
       button(id="searchBtn" class="searchBtn" @click="clearSearch()"  aria-label="Clear Search" title="Clear search" role="button") clear
 
     <site-pagination />
-
-    div(v-if="this.searchFor" style="color:red") Under Development
-
+   
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
 import debounce from "./../ts/debounce";
 import SitePagination from "@/components/SitePagination.vue";
+
+import HistoryService from "./../services/HistoryService";
+import CourseService from "./../services/CourseService";
+import ProjectService from "./../services/ProjectService";
 
 @Component({
   components: {
@@ -32,50 +34,93 @@ import SitePagination from "@/components/SitePagination.vue";
 })
 export default class Search extends Vue {
   searchFor: any = "";
-  page = 0;
-  count = 0;
-  maxItemsPerPage = 0;
-  //pathTo = "";
-
-  created() {
-    this.$store.commit("setSearchedFor", this.$route.query.q || "");
-    this.searchFor = this.$route.query.q || "";
-    this.page = +this.$route.query.page || 0;
-    this.count = this.$store.state.pageRecordCount || 0;
-    this.maxItemsPerPage = this.$store.state.maxRecordsPerPage;
-  }
+  containerStyle = "paginationNo";
 
   mounted() {
-    // TODO remove this code after adding reactivity
     // if searching put the cursor inside the search box
-    if (this.searchFor) {
+    if (this.$route.query.q) {
+      this.searchFor = this.$route.query.q;
       const input = document.getElementById("searchSite") as HTMLInputElement;
       input.focus();
+    }
+    this.setContainerStyle();
+  }
+
+  updated() {
+    this.setContainerStyle();
+  }
+
+  setContainerStyle() {
+    if (
+      this.$store.state.pageRecordCount == this.$store.state.maxRecords ||
+      this.$store.state.pageNum > 1
+    ) {
+      this.containerStyle = "paginationNo";
+    } else {
+      this.containerStyle = "paginationYes";
     }
   }
 
   searchFilter() {
-    //this.searchFor = "TODO filter here";
+    this.searchFor = this.searchFor.replace(/[^A-Z ]/gi, "");
     this.$store.commit("setSearchedFor", this.searchFor);
   }
 
   clearSearch() {
     this.searchFor = "";
     this.$store.commit("setSearchedFor", "");
-    location.href = window.location.pathname;
+    this.$store.commit("setPageNum", 1);
 
-    // this.$router.push({ path: this.pathTo }).catch((err) => {
-    //   console.log(err);
-    // });
+    this.$router.push({ path: window.location.pathname }).catch((err) => {
+      console.log(err);
+    });
   }
 
   debounceMe = debounce(() => {
-    // TODO make reactive
-    location.href = window.location.pathname + "?q=" + this.$store.state.search;
+    this.searchFor = this.$store.state.search.replace(/[^A-Z ]/gi, "");
+    this.$store.commit("setPageNum", 1);
+
+    this.$router
+      .push({ path: window.location.pathname + "?q=" + this.searchFor })
+      .catch((err) => {
+        console.log(err);
+      });
   }, 500);
+
+  // search data
+  @Watch("$route")
+  async onPropertyChanged(value: any, oldValue: any) {
+    let pageData = "";
+
+    switch (this.$route.name) {
+      case "Courses":
+        pageData = await CourseService.getCourse(
+          value,
+          this.$route.query.dir,
+          value.query.q
+        );
+        break;
+      case "History":
+        pageData = await HistoryService.getHistory(
+          value,
+          this.$route.query.dir,
+          value.query.q
+        );
+        break;
+      case "Projects":
+        pageData = await ProjectService.getProject(
+          value,
+          this.$route.query.dir,
+          value.query.q
+        );
+        break;
+    }
+
+    this.$store.commit("setRecords", pageData);
+  }
 }
 </script>
 
 <style scoped lang="scss">
-@import "./../scss/search.scss";
+@import "./../scss/header/search.scss";
 </style>

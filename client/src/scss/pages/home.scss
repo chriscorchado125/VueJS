@@ -1,13 +1,14 @@
-@import "variables.scss";
+@import "./../variables.scss";
 
 .homeSelected {
   border: 1px dashed $main_color;
 }
 
 .container {
-  padding-bottom: 60px;
+  padding: 20px 50px;
   h1 {
     margin-top: 100px;
+    margin-bottom: 30px;
   }
 }
 
@@ -15,9 +16,32 @@
   margin-top: 130px;
 }
 
+@media (max-width: 1182px) {
+  .container {
+    max-width: 960px;
+    padding: 20px 40px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    max-width: 860px;
+  }
+}
+
+@media (max-width: 990px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
 @media (max-width: 800px) {
   .container {
-    padding-bottom: 40px !important;
+    padding: 15px 5px;
+    max-width: 550px;
+    p {
+      padding: 5px;
+    }
   }
 }
 
@@ -58,13 +82,10 @@
   }
 }
 
-#vueJS {
-  text-align: center;
-  pointer-events: none;
-}
-
 #vueJS a img {
   box-shadow: 5px 5px 15px 2px #888888 !important;
+  background-color: red !important;
+  padding: 50px;
 }
 
 #vueJS-here {

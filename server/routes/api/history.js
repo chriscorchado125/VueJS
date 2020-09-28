@@ -24,12 +24,14 @@ router.get("/", async (req, res) => {
   res.send(
     await history
       .find(queryParams, "name description screenshots job_title start_date end_date")
-      .limit(51)
+      .sort({ _id: 1, created: 1, end_date: 1, name: -1 })
+      .limit(50)
       .toArray()
   );
 });
 
 async function loadHistoryData() {
+  //process.env.MONGODB_URI
   const client = await mongodb.MongoClient.connect(
     process.env.MONGODB_URI,
     { useNewUrlParser: true },

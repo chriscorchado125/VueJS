@@ -9,15 +9,15 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import SiteHeaderComponent from "@/components/SiteHeader.vue";
-import ProjectComponent from "@/components/Project.vue";
-import SiteFooterComponent from "@/components/SiteFooter.vue";
+import SiteHeaderComponent from "@/components/layout/SiteHeader.vue";
+import ProjectComponent from "@/components/pages/Project.vue";
+import SiteFooterComponent from "@/components/layout/SiteFooter.vue";
 
 @Component({
   components: {
+    SiteHeaderComponent,
     ProjectComponent,
-    SiteFooterComponent,
-    SiteHeaderComponent
+    SiteFooterComponent
   }
 })
 export default class Course extends Vue {}

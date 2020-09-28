@@ -10,15 +10,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-import SiteHeaderComponent from "@/components/SiteHeader.vue";
-import HistoryComponent from "@/components/History.vue";
-import SiteFooterComponent from "@/components/SiteFooter.vue";
+import SiteHeaderComponent from "@/components/layout/SiteHeader.vue";
+import HistoryComponent from "@/components/pages/History.vue";
+import SiteFooterComponent from "@/components/layout/SiteFooter.vue";
 
 @Component({
   components: {
+    SiteHeaderComponent,
     HistoryComponent,
-    SiteFooterComponent,
-    SiteHeaderComponent
+    SiteFooterComponent
   }
 })
 export default class History extends Vue {}

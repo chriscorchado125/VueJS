@@ -1,10 +1,10 @@
-@import "variables.scss";
+@import "./../variables.scss";
 
 #search-container {
   float: right;
-  margin: -55px 0 0 0;
+  margin: -65px 0 0 0;
   padding: 0px;
-  width: 280px;
+  width: 300px;
   text-align: center;
 
   #searchCount {
@@ -17,7 +17,7 @@
 
   /* search textbox */
   #searchSite {
-    width: 130px;
+    width: 150px;
   }
 
   /* remove IE “clear field or cross” X button from inputs field */
@@ -27,10 +27,9 @@
 
   /* search button */
   .searchBtn {
-    padding: 3px;
-    font-size: 14px;
-    border-radius: 5px;
-    margin-left: 10px;
+    padding: 2px;
+    font-size: 12px;
+    margin-left: 3px;
   }
 
   .searchBtn:hover {
@@ -55,7 +54,6 @@
       width: 105px;
     }
     #searchBtn {
-      padding: 0 2px;
       margin-left: 5px;
     }
     #searchCount {
@@ -69,6 +67,10 @@
     #searchSite {
       width: 95px;
       font-size: 12px;
+    }
+
+    #searchCount {
+      width: 75px;
     }
   }
 }

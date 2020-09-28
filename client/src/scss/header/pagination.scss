@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "./../variables.scss";
 
 #pagination {
   text-align: center;
@@ -24,6 +24,7 @@
 
 @media (max-width: 700px) {
   #pagination {
+    display: inline;
     padding-left: 30px;
   }
 }

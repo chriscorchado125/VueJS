@@ -34,12 +34,14 @@ router.get("/", async (req, res) => {
         queryParams,
         "screenshots name description company_name videos technology project_date"
       )
-      .limit(51)
+      .sort({ _id: 1, project_date: 1, name: 1, created: 1 })
+      .limit(50)
       .toArray()
   );
 });
 
 async function loadProjectData() {
+  //process.env.MONGODB_URI
   const client = await mongodb.MongoClient.connect(
     process.env.MONGODB_URI,
     { useNewUrlParser: true },

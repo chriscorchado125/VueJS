@@ -10,15 +10,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-import SiteHeaderComponent from "@/components/SiteHeader.vue";
-import ContactComponent from "@/components/Contact.vue";
-import SiteFooterComponent from "@/components/SiteFooter.vue";
+import SiteHeaderComponent from "@/components/layout/SiteHeader.vue";
+import ContactComponent from "@/components/pages/Contact.vue";
+import SiteFooterComponent from "@/components/layout/SiteFooter.vue";
 
 @Component({
   components: {
+    SiteHeaderComponent,
     ContactComponent,
-    SiteFooterComponent,
-    SiteHeaderComponent
+    SiteFooterComponent
   }
 })
 export default class Contact extends Vue {}

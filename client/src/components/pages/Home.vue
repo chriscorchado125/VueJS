@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  main.container(role="main")
+  main.container.homepage(role="main")
     h1 About Me
 
     if error
@@ -13,7 +13,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import HomeService from "./../services/HomeService";
+import HomeService from "./../../services/HomeService";
 
 @Component
 export default class Home extends Vue {
@@ -29,10 +29,13 @@ export default class Home extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+
+    const titleEl = document.querySelector("head title");
+    titleEl.textContent = "Chris Corchado - Homepage - Portfolio and Resume";
   }
 }
 </script>
 
-<style lang="scss">
-@import "./../scss/home.scss";
+<style scoped lang="scss">
+@import "./../../scss/pages/home.scss";
 </style>

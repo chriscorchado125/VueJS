@@ -1,6 +1,6 @@
-@import "variables.scss";
-@import "navigation.scss";
-@import "hover-animation.scss";
+@import "./variables.scss";
+@import "./header/navigation.scss";
+@import "./animation/hover-animation.scss";
 
 html {
   overflow-y: scroll;
@@ -95,6 +95,14 @@ h1 {
   background-color: yellow;
 }
 
+.paginationYes {
+  margin: -53px 0 0 0 !important;
+}
+
+.paginationNo {
+  margin: -65px 0 0 0 !important;
+}
+
 /* space for top navigation */
 .container {
   margin: 0 auto;
@@ -104,7 +112,6 @@ h1 {
   border-radius: 0 0 15px 15px;
   max-width: 1130px;
 }
-
 
 #noRecords {
   font-size: 36px;
@@ -188,13 +195,24 @@ span.featherlight {
   }
 }
 
-@media (max-width: 600px) {
-  #footer {
-    display: none;
+@media (max-width: 1182px) {
+  .container {
+    max-width: 960px;
+    padding: 20px 10px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    max-width: 860px;
   }
 }
 
 @media (max-width: 990px) {
+  .container {
+    max-width: 730px;
+  }
+
   .site-versions {
     font-size: 10px;
     img.homepage-icon {
@@ -203,10 +221,54 @@ span.featherlight {
   }
 }
 
+@media (max-width: 800px) {
+  .container {
+    padding: 15px 5px;
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 750px) {
+  .container {
+    h1 {
+      padding-top: 0 !important;
+    }
+  }
+}
+
 @media (max-width: 700px) {
   h1 {
     font-size: 24px;
   }
+  .container {
+    max-width: 545px;
+    h1 {
+      margin-top: 130px !important;
+    }
+  }
+  .paginationYes {
+    margin: 0 0 0 0 !important;
+  }
+
+  .paginationNo {
+    margin: 0 0 0 0 !important;
+  }
 }
 
+@media (max-width: 600px) {
+  #footer {
+    display: none;
+  }
+}
 
+@media (max-width: 500px) {
+  .container {
+    margin-top: -20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    margin-top: -40px;
+  }
+}

@@ -2,7 +2,7 @@
 
   main.container(role="main")
 
-    div#noRecords(v-if="this.data.length == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
+    div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
 
     h1(v-else) History
 
@@ -11,7 +11,7 @@
 
     div.container.company
 
-      div.company-container.col.shadow(v-for="item in data" :key="item._id")
+      div.company-container.col.shadow(v-for="item in this.$store.state.pageRecords" :key="item._id")
 
         div.company-name(v-html="highlightSearch(item.history.name, query)")
 
@@ -32,9 +32,9 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import HistoryService from "./../services/HistoryService";
-import getMonthYear from "./../ts/getMonthYear";
-import highlightSearch from "./../ts/highlightSearch";
+import HistoryService from "./../../services/HistoryService";
+import getMonthYear from "./../../ts/getMonthYear";
+import highlightSearch from "./../../ts/highlightSearch";
 
 @Component
 export default class History extends Vue {
@@ -49,6 +49,9 @@ export default class History extends Vue {
     } catch (err) {
       this.error = err.message;
     }
+
+    const titleEl = document.querySelector("head title");
+    titleEl.textContent = "Chris Corchado - History - Portfolio and Resume";
   }
 
   getMonthYear = getMonthYear;
@@ -58,5 +61,5 @@ export default class History extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "./../scss/company.scss";
+@import "./../../scss/pages/company.scss";
 </style>
