@@ -40,7 +40,7 @@ import highlightSearch from "./../../ts/highlightSearch";
 export default class History extends Vue {
   data: Array<object> = [];
   error = "";
-  query = this.$route.query.q || "";
+  query = this.$route.query.q;
 
   async created() {
     try {
@@ -54,6 +54,10 @@ export default class History extends Vue {
   mounted() {
     const titleEl: any = document.querySelector("head title");
     titleEl.textContent = "Chris Corchado - History - Portfolio and Resume";
+  }
+
+  beforeUpdate() {
+    this.query = this.$route.query.q;
   }
 
   getMonthYear = getMonthYear;

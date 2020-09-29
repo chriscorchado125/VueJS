@@ -39,6 +39,7 @@ router.get("/", async (req, res) => {
   }
 
   const courses = await loadCourseData();
+
   const dataToReturn = await courses
     .find(queryParams, "name certificate_pdf certificate_image track_image course_date")
     .sort({ _id: 1, created: 1 })

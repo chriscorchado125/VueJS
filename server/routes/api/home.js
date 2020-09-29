@@ -3,10 +3,20 @@ const mongodb = require("mongodb");
 
 const router = express.Router();
 
+ObjectID = require("mongodb").ObjectID;
+
+const MAX_ITEMS_PER_PAGE = 50;
+
 router.get("/", async (req, res) => {
   //
   const home = await loadHomeData();
-  res.send(await home.find({}).toArray());
+
+  const dataToReturn = await home.find({}).toArray();
+
+  res.cookie("recordCount", dataToReturn.length);
+  res.cookie("maxItemsPerPage", MAX_ITEMS_PER_PAGE);
+
+  res.send(dataToReturn);
 });
 
 async function loadHomeData() {

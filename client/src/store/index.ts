@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     search: "",
     pageNum: 1,
-    maxRecords: 0,
+    maxRecords: 50,
     pageDirection: "",
     nextRecord: false,
     pageRecords: [],
