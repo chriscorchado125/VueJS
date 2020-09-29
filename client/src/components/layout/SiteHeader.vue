@@ -11,15 +11,15 @@
           div#navbar-nav.navbar-nav.show
 
             router-link#logo.navbar-brand(to="/")
-              img(src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" title="Home" :class="homeSelected" alt="Chris Corchado Logo" tabindex=counter++)
+              img(src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" title="Home" :class="homeSelected" alt="Chris Corchado Logo" tabindex='2')
 
-            router-link(to="/history" class="nav-item nav-link" id="companies-link" tabindex="2") History
+            router-link(to="/history" class="nav-item nav-link" id="companies-link" tabindex="3") History
 
-            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="3") Courses          
+            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="4") Courses          
 
-            router-link(to="/projects" class="nav-item nav-link" id="project-link" tabindex="4") Projects
+            router-link(to="/projects" class="nav-item nav-link" id="project-link" tabindex="5") Projects
 
-            router-link(to="/contact" class="nav-item nav-link" id="contact-link" tabindex="5") Contact
+            router-link(to="/contact" class="nav-item nav-link" id="contact-link" tabindex="6") Contact
 
           <profile-component v-if='this.$route.name == "Index" || this.$route.name == "Contact"' />
 
