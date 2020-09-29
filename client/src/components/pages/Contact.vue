@@ -39,6 +39,11 @@ export default class Contact extends Vue {
     titleEl.textContent = "Chris Corchado - Contact Me - Portfolio and Resume";
   }
 
+  updated() {
+    const emailField: any = document.getElementById("edit-mail");
+    emailField.focus();
+  }
+
   getForm(data) {
     let form = data.substr(data.indexOf("<form"), data.indexOf("</form>"));
     form = form.substr(0, form.indexOf("</form>") + 8);
