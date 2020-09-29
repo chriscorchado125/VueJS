@@ -2,15 +2,17 @@
 
   div#search-container(role="search" :class="containerStyle")
 
-    span#searchCount(v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
+    - let counter = 6
+
+    span#searchCount(v-if="this.$store.state.pageRecordUserText" tabindex=counter++) {{ this.$store.state.pageRecordUserText }}
 
     label
       span.screen-reader Search
-      input(type="text" id="searchSite" @keypress="debounceMe()" @keyup="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Search" placeholder="Search items"  )
+      input(type="text" id="searchSite" @keypress="debounceMe()" @keyup="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Search" placeholder="Search items" tabindex=counter++)
   
     label
       span.screen-reader Clear Search
-      button(id="searchBtn" class="searchBtn" @click="clearSearch()"  aria-label="Clear Search" title="Clear search" role="button") clear
+      button(id="searchBtn" class="searchBtn" @click="clearSearch()"  aria-label="Clear Search" title="Clear search" role="button" tabindex=counter++) clear
 
     <site-pagination />
    

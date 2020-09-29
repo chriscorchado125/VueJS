@@ -1,27 +1,31 @@
 <template lang="pug">
 
-  header#navigation
+  span
 
-    nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow
-      div#navbarCollapse.navbar-collapse
-        div#navbar-nav.navbar-nav.show
+    a#skip-links.screen-reader(href='#content' tabindex=1 style="position: absolute;left: -10000px;top: auto;width: 1px;height: 1px;overflow: hidden;") Skip Navigation
+    
+    header#navigation
 
-          router-link#logo.navbar-brand(to="/")
-            img(src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" title="Home" :class="homeSelected" alt="Chris Corchado Logo")
+      nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow
+        div#navbarCollapse.navbar-collapse
+          div#navbar-nav.navbar-nav.show
 
-          router-link(to="/history" class="nav-item nav-link" id="companies-link") History
+            router-link#logo.navbar-brand(to="/")
+              img(src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" title="Home" :class="homeSelected" alt="Chris Corchado Logo" tabindex=counter++)
 
-          router-link(to="/courses" class="nav-item nav-link" id="courses-link") Courses          
+            router-link(to="/history" class="nav-item nav-link" id="companies-link" tabindex="2") History
 
-          router-link(to="/projects" class="nav-item nav-link" id="project-link") Projects
+            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="3") Courses          
 
-          router-link(to="/contact" class="nav-item nav-link" id="contact-link") Contact
+            router-link(to="/projects" class="nav-item nav-link" id="project-link" tabindex="4") Projects
 
-        <profile-component v-if='currentRouteName == "Index" || currentRouteName == "Contact"' />
+            router-link(to="/contact" class="nav-item nav-link" id="contact-link" tabindex="5") Contact
 
-        <search-component v-if='pageIsSearchable' />
-      
-      </template>
+          <profile-component v-if='this.$route.name == "Index" || this.$route.name == "Contact"' />
+
+          <search-component v-if='pageIsSearchable' />
+
+</template>
 
 <script lang="ts">
 import Vue from "vue";
@@ -37,7 +41,6 @@ import ProfileComponent from "@/components/Profile.vue";
 })
 export default class SiteHeader extends Vue {
   homeSelected = "";
-  currentPage = "";
 
   created() {
     // home link uses a dashed border style around the logo
@@ -51,20 +54,14 @@ export default class SiteHeader extends Vue {
     this.setMetaTags();
   }
 
-  get currentRouteName() {
-    this.currentPage = location.href;
-    return this.$route.name;
-  }
-
   get pageIsSearchable() {
-    if (this.currentRouteName == "Index" || this.currentRouteName == "Contact")
-      return false;
+    if (this.$route.name == "Index" || this.$route.name == "Contact") return false;
     return true;
   }
 
   setMetaTags() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - History - Portfolio and Resume";
+    const htmlEL: any = document.querySelector("html");
+    htmlEL.setAttribute("lang", "en");
 
     const link: any = document.createElement("link");
     link.href = "https://chriscorchado.com/images/chrisCorchado.ico";

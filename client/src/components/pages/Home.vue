@@ -1,7 +1,8 @@
 <template lang="pug">
 
   main.container.homepage(role="main")
-    h1 About Me
+  
+    h1(id='content' tabindex="12") About Me
 
     if error
       p #{ error }

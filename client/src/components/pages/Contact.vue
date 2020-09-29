@@ -3,7 +3,8 @@
   main.container(role="main")
 
     div#contact.container.contact-form
-      h1 Contact
+
+      h1(id='content' tabindex="12")  Contact
 
       if error
         p #{ error }
