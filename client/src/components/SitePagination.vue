@@ -2,10 +2,10 @@
 
     div#pagination(v-if="this.$store.state.pageNum > 1 || nextLinkValue()")
 
-      a.pager-navigation(v-if="this.$store.state.pageNum > 1" @click="pageRecords('prev')" href="#" id="prevLink" title="View the previous page" role='button') Prev
+      a.pager-navigation(v-if="this.$store.state.pageNum > 1 && activateNav" @click="pageRecords('prev')" href="#" id="prevLink" title="View the previous page" role='button') Prev
       span.pager-navigation.disabled(v-else title="There is no previous page available" role='button') Prev
 
-      a.pager-navigation(v-if="nextLinkValue()" @click="pageRecords('next')" href="#" id="nextLink" title="View the next page" role='button') Next
+      a.pager-navigation(v-if="nextLinkValue() && activateNav" @click="pageRecords('next')" href="#" id="nextLink" title="View the next page" role='button') Next
       span.pager-navigation.disabled(v-else title="There is no previous page available" role='button') Next
 
     if error
@@ -28,6 +28,7 @@ export default class SitePagination extends Vue {
   direction = "";
   recordCount = SitePagination.getCookie("recordCount");
   //nextLink = SitePagination.getCookie("nextLink");
+  activateNav = true;
 
   created() {
     this.$store.commit("setMaxItemsPerPage", SitePagination.getCookie("maxItemsPerPage"));
@@ -35,6 +36,11 @@ export default class SitePagination extends Vue {
 
   private pageRecords(dir) {
     this.direction = dir;
+    this.activateNav = false;
+
+    if (this.currentPageNum !== this.$store.state.pageNum) {
+      this.currentPageNum = this.$store.state.pageNum;
+    }
 
     if (dir == "next") this.currentPageNum++;
     if (dir == "prev") this.currentPageNum--;
@@ -106,6 +112,7 @@ export default class SitePagination extends Vue {
     }
 
     this.$store.commit("setRecords", pageData);
+    this.activateNav = true;
   }
 }
 </script>
