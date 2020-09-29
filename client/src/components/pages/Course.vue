@@ -48,11 +48,6 @@ export default class Course extends Vue {
   error = "";
   query = this.$route.query.q;
 
-  metaInfo: {
-    title: "Default App Title";
-    titleTemplate: "%s | vue-meta Example App";
-  };
-
   async created() {
     try {
       this.data = await CourseService.getCourse();

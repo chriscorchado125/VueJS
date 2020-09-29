@@ -144,6 +144,11 @@
 }
 
 @media (max-width: 800px) {
+  .container {
+    h1 {
+      padding-top: 10px !important;
+    }
+  }
   .project-container {
     grid-template-columns: 1fr;
   }
