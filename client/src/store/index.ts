@@ -22,7 +22,7 @@ export default new Vuex.Store({
       let itemText = "Items";
       if (state.pageRecordCount == 1) itemText = "Item";
 
-      let pagingText;
+      let pagingText: string;
 
       // add pagination
       // TODO: fix next link to replace state.pageRecordCount == state.maxRecords
@@ -44,8 +44,12 @@ export default new Vuex.Store({
           }
         }
       } else {
-        // no pagination
-        pagingText = data.length + " " + itemText;
+        // contact us does not return data.length because the HTML is scraped
+        if (data.length) {
+          pagingText = data.length + " " + itemText;
+        } else {
+          pagingText = "";
+        }
       }
 
       state.pageRecordUserText = pagingText;
