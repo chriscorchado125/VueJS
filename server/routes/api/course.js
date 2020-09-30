@@ -73,7 +73,6 @@ router.get("/", async (req, res) => {
 });
 
 async function loadCourseData() {
-  //process.env.MONGODB_URI
   const client = await mongodb.MongoClient.connect(
     process.env.MONGODB_URI,
     { useNewUrlParser: true },

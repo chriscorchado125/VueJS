@@ -8,7 +8,6 @@ ObjectID = require("mongodb").ObjectID;
 const MAX_ITEMS_PER_PAGE = 50;
 
 router.get("/", async (req, res) => {
-  //
   let pageNum = req.query.page;
   let pageDir = req.query.dir;
 
@@ -94,7 +93,6 @@ router.get("/", async (req, res) => {
 });
 
 async function loadProjectData() {
-  //process.env.MONGODB_URI
   const client = await mongodb.MongoClient.connect(
     process.env.MONGODB_URI,
     { useNewUrlParser: true },

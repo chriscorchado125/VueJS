@@ -8,9 +8,7 @@ ObjectID = require("mongodb").ObjectID;
 const MAX_ITEMS_PER_PAGE = 50;
 
 router.get("/", async (req, res) => {
-  //
   const home = await loadHomeData();
-
   const dataToReturn = await home.find({}).toArray();
 
   res.cookie("recordCount", dataToReturn.length);
@@ -20,7 +18,6 @@ router.get("/", async (req, res) => {
 });
 
 async function loadHomeData() {
-  //process.env.MONGODB_URI
   const client = await mongodb.MongoClient.connect(
     process.env.MONGODB_URI,
     { useNewUrlParser: true },
