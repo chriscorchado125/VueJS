@@ -149,6 +149,14 @@ span.featherlight {
   font-size: 24px !important;
 }
 
+.featherlight .featherlight-close-icon {
+  background-color: #0078d7 !important;
+  padding: 0 10px 0 3px !important;
+  border: 2px solid black !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
 // homepage site icons
 .site-versions {
   display: grid;
