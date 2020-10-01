@@ -1,24 +1,16 @@
 <template>
   <span>
-    <SiteHeaderComponent />
     <CourseComponent />
-    <SiteFooterComponent />
   </span>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-
-import SiteHeaderComponent from "@/components/layout/SiteHeader.vue";
+import { Component, Vue } from "vue-property-decorator";
 import CourseComponent from "@/components/pages/Course.vue";
-import SiteFooterComponent from "@/components/layout/SiteFooter.vue";
 
 @Component({
   components: {
-    SiteHeaderComponent,
-    CourseComponent,
-    SiteFooterComponent
+    CourseComponent
   }
 })
 export default class Course extends Vue {}

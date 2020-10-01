@@ -1,24 +1,16 @@
 <template>
   <span>
-    <SiteHeaderComponent />
     <HistoryComponent />
-    <SiteFooterComponent />
   </span>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-
-import SiteHeaderComponent from "@/components/layout/SiteHeader.vue";
+import { Component, Vue } from "vue-property-decorator";
 import HistoryComponent from "@/components/pages/History.vue";
-import SiteFooterComponent from "@/components/layout/SiteFooter.vue";
 
 @Component({
   components: {
-    SiteHeaderComponent,
-    HistoryComponent,
-    SiteFooterComponent
+    HistoryComponent
   }
 })
 export default class History extends Vue {}
