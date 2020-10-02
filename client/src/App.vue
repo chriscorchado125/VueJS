@@ -2,7 +2,9 @@
   <div id="app">
     <SiteHeader />
     <!--keep-alive include="[History, Course, Project]"-->
-    <router-view />
+    <transition name="fade">
+      <router-view />
+    </transition>
     <!--/keep-alive-->
     <SiteFooter />
   </div>
@@ -23,3 +25,15 @@ import SiteFooter from "@/components/layout/SiteFooter.vue";
 })
 export default class App extends Vue {}
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
