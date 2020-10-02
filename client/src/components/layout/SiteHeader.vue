@@ -3,7 +3,7 @@
   span
 
     a#skip-links.screen-reader(href='#content' tabindex=1 style="position: absolute;left: -10000px;top: auto;width: 1px;height: 1px;overflow: hidden;") Skip Navigation
-    
+
     header#navigation
 
       nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow
@@ -15,7 +15,7 @@
 
             router-link(to="/history" class="nav-item nav-link" id="companies-link" tabindex="3") History
 
-            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="4") Courses          
+            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="4") Courses
 
             router-link(to="/projects" class="nav-item nav-link" id="project-link" tabindex="5") Projects
 
@@ -30,6 +30,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
 import SearchComponent from "@/components/Search.vue";
 import ProfileComponent from "@/components/Profile.vue";
 
@@ -81,6 +82,13 @@ export default class SiteHeader extends Vue {
       "Chris Corchado, Christian Corchado, Web Engineeer, Full Stack Web Developer, Web Application Developer, Graphic Designer, Online Portfolio, Resume, Engineer, Programmer, Developer"
     );
     document.getElementsByTagName("head")[0].appendChild(keyword);
+  }
+
+  @Watch("$route")
+  onPropertyChanged(value: any, oldValue: any) {
+    if (!value.query.page) {
+      this.$store.commit("setPageNum", 1);
+    }
   }
 }
 </script>
