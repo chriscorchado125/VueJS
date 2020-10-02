@@ -39,12 +39,6 @@ export default class Search extends Vue {
   containerStyle = "paginationNo";
 
   mounted() {
-    // if searching put the cursor inside the search box
-    if (this.$route.query.q) {
-      this.searchFor = this.$route.query.q;
-      const input = document.getElementById("searchSite") as HTMLInputElement;
-      input.focus();
-    }
     this.setContainerStyle();
   }
 
@@ -99,21 +93,21 @@ export default class Search extends Vue {
         pageData = await CourseService.getCourse(
           this.$route.query.page,
           this.$route.query.dir,
-          value.query.q
+          this.$store.state.search
         );
         break;
       case "History":
         pageData = await HistoryService.getHistory(
           this.$route.query.page,
           this.$route.query.dir,
-          value.query.q
+          this.$store.state.search
         );
         break;
       case "Projects":
         pageData = await ProjectService.getProject(
           this.$route.query.page,
           this.$route.query.dir,
-          value.query.q
+          this.$store.state.search
         );
         break;
     }

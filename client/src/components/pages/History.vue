@@ -12,8 +12,8 @@
     div.container.company
 
       div.company-container.col.shadow(v-for="(item, index) in this.$store.state.pageRecords" :key="item._id")
-    
-        div.company-name(v-html="highlightSearch(item.history.name, query)" :tabIndex="tabIndex") 
+
+        div.company-name(v-html="highlightSearch(item.history.name, query)" :tabIndex="tabIndex")
 
         div.company-job-title(v-html="highlightSearch(item.history.job_title, query)" :tabIndex="tabIndex")
 
@@ -40,12 +40,12 @@ import highlightSearch from "./../../ts/highlightSearch";
 export default class History extends Vue {
   data: Array<object> = [];
   error = "";
-  query = this.$route.query.q;
+  query = this.$store.state.search;
   tabCount = 20;
 
   async created() {
     try {
-      this.data = await HistoryService.getHistory(this.query);
+      this.data = await HistoryService.getHistory();
       this.$store.commit("setRecords", this.data);
     } catch (err) {
       this.error = err.message;
