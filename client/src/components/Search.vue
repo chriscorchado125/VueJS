@@ -9,13 +9,13 @@
     label
       span.screen-reader Search
       input(type="text" id="searchSite" @keypress="debounceMe()" @keyup="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Search" placeholder="Search items" tabindex=counter++)
-  
+
     label
       span.screen-reader Clear Search
       button(id="searchBtn" class="searchBtn" @click="clearSearch()"  aria-label="Clear Search" title="Clear search" role="button" tabindex=counter++) clear
 
     <site-pagination />
-   
+
 </template>
 
 <script lang="ts">
@@ -97,21 +97,21 @@ export default class Search extends Vue {
     switch (this.$route.name) {
       case "Courses":
         pageData = await CourseService.getCourse(
-          value,
+          this.$route.query.page,
           this.$route.query.dir,
           value.query.q
         );
         break;
       case "History":
         pageData = await HistoryService.getHistory(
-          value,
+          this.$route.query.page,
           this.$route.query.dir,
           value.query.q
         );
         break;
       case "Projects":
         pageData = await ProjectService.getProject(
-          value,
+          this.$route.query.page,
           this.$route.query.dir,
           value.query.q
         );
