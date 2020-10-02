@@ -3,7 +3,7 @@
   span
 
     a#skip-links.screen-reader(href='#content' tabindex=1 style="position: absolute;left: -10000px;top: auto;width: 1px;height: 1px;overflow: hidden;") Skip Navigation
-
+    
     header#navigation
 
       nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow
@@ -15,7 +15,7 @@
 
             router-link(to="/history" class="nav-item nav-link" id="companies-link" tabindex="3") History
 
-            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="4") Courses
+            router-link(to="/courses" class="nav-item nav-link" id="courses-link" tabindex="4") Courses          
 
             router-link(to="/projects" class="nav-item nav-link" id="project-link" tabindex="5") Projects
 
@@ -43,10 +43,6 @@ export default class SiteHeader extends Vue {
   homeSelected = "";
 
   created() {
-    this.setMetaTags();
-  }
-
-  updated() {
     // home link uses a dashed border style around the logo
     // the other link styles are set in the router using linkActiveClass: "nav-item-active"
     if (this.$route.name == "Index") this.homeSelected = "homeSelected";
@@ -54,6 +50,8 @@ export default class SiteHeader extends Vue {
     // reset searched and page number when navigating
     this.$store.commit("setSearchedFor", "");
     this.$store.commit("setPageNum", 1);
+
+    this.setMetaTags();
   }
 
   get pageIsSearchable() {

@@ -9,13 +9,13 @@
     label
       span.screen-reader Search
       input(type="text" id="searchSite" @keypress="debounceMe()" @keyup="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Search" placeholder="Search items" tabindex=counter++)
-
+  
     label
       span.screen-reader Clear Search
       button(id="searchBtn" class="searchBtn" @click="clearSearch()"  aria-label="Clear Search" title="Clear search" role="button" tabindex=counter++) clear
 
     <site-pagination />
-
+   
 </template>
 
 <script lang="ts">
@@ -35,10 +35,16 @@ import ProjectService from "./../services/ProjectService";
   }
 })
 export default class Search extends Vue {
-  searchFor = this.$store.state.search;
+  searchFor: any = "";
   containerStyle = "paginationNo";
 
   mounted() {
+    // if searching put the cursor inside the search box
+    if (this.$route.query.q) {
+      this.searchFor = this.$route.query.q;
+      const input = document.getElementById("searchSite") as HTMLInputElement;
+      input.focus();
+    }
     this.setContainerStyle();
   }
 
@@ -86,11 +92,6 @@ export default class Search extends Vue {
   // search data
   @Watch("$route")
   async onPropertyChanged(value: any, oldValue: any) {
-    // when changing pages reset search
-    if (value.name !== oldValue.name) {
-      this.clearSearch();
-    }
-
     let pageData = "";
 
     switch (this.$route.name) {
@@ -98,21 +99,21 @@ export default class Search extends Vue {
         pageData = await CourseService.getCourse(
           value,
           this.$route.query.dir,
-          this.$store.state.search
+          value.query.q
         );
         break;
       case "History":
         pageData = await HistoryService.getHistory(
           value,
           this.$route.query.dir,
-          this.$store.state.search
+          value.query.q
         );
         break;
       case "Projects":
         pageData = await ProjectService.getProject(
           value,
           this.$route.query.dir,
-          this.$store.state.search
+          value.query.q
         );
         break;
     }

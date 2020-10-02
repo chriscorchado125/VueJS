@@ -1,5 +1,7 @@
 <template>
-  <HomeComponent />
+  <span>
+    <HomeComponent />
+  </span>
 </template>
 
 <script lang="ts">
