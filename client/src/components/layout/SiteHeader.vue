@@ -48,6 +48,10 @@ export default class SiteHeader extends Vue {
     this.$store.commit("setSearchedFor", "");
     this.$store.commit("setPageNum", 1);
 
+    if (this.$route.name == "Index") {
+      this.homeSelected = "homeSelected";
+    }
+
     this.setMetaTags();
   }
 
