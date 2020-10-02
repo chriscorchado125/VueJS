@@ -1,7 +1,5 @@
 <template>
-  <span>
-    <CourseComponent />
-  </span>
+  <CourseComponent />
 </template>
 
 <script lang="ts">

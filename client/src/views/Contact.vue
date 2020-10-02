@@ -1,7 +1,5 @@
 <template>
-  <span>
-    <ContactComponent />
-  </span>
+  <ContactComponent />
 </template>
 
 <script lang="ts">
