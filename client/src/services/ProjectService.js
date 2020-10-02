@@ -1,4 +1,5 @@
 import axios from "axios";
+import getCookie from "./../ts/getCookies";
 
 class ProjectService {
   static getProject(page, dir, search) {
@@ -10,8 +11,8 @@ class ProjectService {
       url += "?page=1";
     }
 
-    url += "&first=" + this.getCookie("firstIDcookie").substring(3, 27);
-    url += "&last=" + this.getCookie("lastIDcookie").substring(3, 27);
+    url += "&first=" + getCookie("firstIDcookie").substring(3, 27);
+    url += "&last=" + getCookie("lastIDcookie").substring(3, 27);
 
     if (search) url += "&q=" + search;
 
