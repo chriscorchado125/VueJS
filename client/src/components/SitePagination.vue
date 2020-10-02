@@ -65,7 +65,7 @@ export default class SitePagination extends Vue {
   async onPropertyChanged(value: string, oldValue: string) {
     let queryString = location.pathname + "?page=" + value;
     if (this.direction) queryString += "&dir=" + this.direction;
-    if (this.$route.query.q) queryString += "&q=" + this.$route.query.q;
+    if (this.$store.state.search) queryString += "&q=" + this.$store.state.search;
 
     this.$router.push({ path: queryString }).catch((err) => {
       console.log(err);
@@ -78,21 +78,21 @@ export default class SitePagination extends Vue {
         pageData = await CourseService.getCourse(
           value,
           this.direction,
-          this.$route.query.q
+          this.$store.state.search
         );
         break;
       case "History":
         pageData = await HistoryService.getHistory(
           value,
           this.direction,
-          this.$route.query.q
+          this.$store.state.search
         );
         break;
       case "Projects":
         pageData = await ProjectService.getProject(
           value,
           this.direction,
-          this.$route.query.q
+          this.$store.state.search
         );
         break;
     }
