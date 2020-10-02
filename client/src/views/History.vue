@@ -1,7 +1,5 @@
 <template>
-  <span>
     <HistoryComponent />
-  </span>
 </template>
 
 <script lang="ts">

@@ -1,7 +1,5 @@
 <template>
-  <span>
     <ProjectComponent />
-  </span>
 </template>
 
 <script lang="ts">
