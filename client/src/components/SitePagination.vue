@@ -7,7 +7,7 @@
 
       a.pager-navigation(v-if="nextLinkValue() && activateNav" @click="pageRecords('next')" href="#" id="nextLink" title="View the next page" role='button' tabindex='10') Next
       span.pager-navigation.disabled(v-else title="There is no next page available" role='button') Next
-      div activateNav: {{ activateNav }} | Next Link: {{ nextLinkValue() }} | this.$store.state.pageNum: {{ this.$store.state.pageNum }}  | Current Page {{ this.currentPageNum }} | Record counte state {{ this.$store.state.pageRecordCount }}
+
     if error
       p #{ error }
 
