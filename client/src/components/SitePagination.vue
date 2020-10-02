@@ -7,10 +7,10 @@
 
       a.pager-navigation(v-if="nextLinkValue() && activateNav" @click="pageRecords('next')" href="#" id="nextLink" title="View the next page" role='button' tabindex='10') Next
       span.pager-navigation.disabled(v-else title="There is no next page available" role='button') Next
-
+      div activateNav: {{ activateNav }} | Next Link: {{ nextLinkValue() }} | this.$store.state.pageNum: {{ this.$store.state.pageNum }}  | Current Page {{ this.currentPageNum }} | Record counte state {{ this.$store.state.pageRecordCount }}
     if error
       p #{ error }
-    
+
 </template>
 
 <script lang="ts">
@@ -22,16 +22,18 @@ import HistoryService from "./../services/HistoryService";
 import CourseService from "./../services/CourseService";
 import ProjectService from "./../services/ProjectService";
 
+import getCookie from "./../ts/getCookie";
+
 @Component
 export default class SitePagination extends Vue {
   currentPageNum = 1;
   direction = "";
-  recordCount = SitePagination.getCookie("recordCount");
-  //nextLink = SitePagination.getCookie("nextLink");
+  recordCount = getCookie("recordCount");
+  //nextLink = getCookie("nextLink");
   activateNav = true;
 
   created() {
-    this.$store.commit("setMaxItemsPerPage", SitePagination.getCookie("maxItemsPerPage"));
+    this.$store.commit("setMaxItemsPerPage", getCookie("maxItemsPerPage"));
   }
 
   private pageRecords(dir) {
@@ -48,25 +50,9 @@ export default class SitePagination extends Vue {
     this.$store.commit("setPagingDirection", dir);
     this.$store.commit("setPageNum", this.currentPageNum);
 
-    //this.$store.commit("setNextRecord", SitePagination.getCookie("nextLink"));
+    //this.$store.commit("setNextRecord", getCookie("nextLink"));
     //this.nextLink = this.$store.state.setNextRecord;
     this.recordCount = this.$store.state.pageRecordCount;
-  }
-
-  static getCookie(cname) {
-    const name = cname + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
   }
 
   // TODO: fix next link.  If the record count is the max then there will be a next link which is not right
