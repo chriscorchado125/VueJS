@@ -10,7 +10,7 @@
 
     if error
       p #{ error }
-    
+
 </template>
 
 <script lang="ts">
@@ -22,16 +22,18 @@ import HistoryService from "./../services/HistoryService";
 import CourseService from "./../services/CourseService";
 import ProjectService from "./../services/ProjectService";
 
+import getCookies from "./../ts/getCookies";
+
 @Component
 export default class SitePagination extends Vue {
   currentPageNum = 1;
   direction = "";
-  recordCount = SitePagination.getCookie("recordCount");
-  //nextLink = SitePagination.getCookie("nextLink");
+  recordCount = getCookies("recordCount");
+  //nextLink = getCookies("nextLink");
   activateNav = true;
 
   created() {
-    this.$store.commit("setMaxItemsPerPage", SitePagination.getCookie("maxItemsPerPage"));
+    this.$store.commit("setMaxItemsPerPage", getCookies("maxItemsPerPage"));
   }
 
   private pageRecords(dir) {
@@ -48,25 +50,9 @@ export default class SitePagination extends Vue {
     this.$store.commit("setPagingDirection", dir);
     this.$store.commit("setPageNum", this.currentPageNum);
 
-    //this.$store.commit("setNextRecord", SitePagination.getCookie("nextLink"));
+    //this.$store.commit("setNextRecord", getCookies("nextLink"));
     //this.nextLink = this.$store.state.setNextRecord;
     this.recordCount = this.$store.state.pageRecordCount;
-  }
-
-  static getCookie(cname) {
-    const name = cname + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
   }
 
   // TODO: fix next link.  If the record count is the max then there will be a next link which is not right
