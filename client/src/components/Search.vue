@@ -88,6 +88,12 @@ export default class Search extends Vue {
   async onPropertyChanged(value: any, oldValue: any) {
     let pageData = "";
 
+    // clear search when navigating between pages - name is the route
+    if (value.name !== oldValue.name) {
+      this.searchFor = "";
+      this.$store.commit("setSearchedFor", "");
+    }
+
     switch (this.$route.name) {
       case "Courses":
         pageData = await CourseService.getCourse(

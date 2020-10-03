@@ -44,14 +44,6 @@ export default class SiteHeader extends Vue {
   homeSelected = "";
 
   created() {
-    // reset searched and page number when navigating
-    this.$store.commit("setSearchedFor", "");
-    this.$store.commit("setPageNum", 1);
-
-    if (this.$route.name == "Index") {
-      this.homeSelected = "homeSelected";
-    }
-
     this.setMetaTags();
   }
 
@@ -86,16 +78,16 @@ export default class SiteHeader extends Vue {
 
   @Watch("$route")
   onPropertyChanged(value: any, oldValue: any) {
+    // home link uses a dashed border style around the logo
+    // the other link styles are set in the router using linkActiveClass: "nav-item-active"
+    if (this.$route.name == "Index") {
+      this.homeSelected = "homeSelected";
+    } else {
+      this.homeSelected = "";
+    }
+
     if (!value.query.page) {
       this.$store.commit("setPageNum", 1);
-
-      // home link uses a dashed border style around the logo
-      // the other link styles are set in the router using linkActiveClass: "nav-item-active"
-      if (this.$route.name == "Index") {
-        this.homeSelected = "homeSelected";
-      } else {
-        this.homeSelected = "";
-      }
     }
   }
 }
