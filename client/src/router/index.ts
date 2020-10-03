@@ -15,20 +15,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Index",
-    component: Home,
-    meta: {
-      title: "Chris Corchado - Homepage - Portfolio and Resume",
-      metaTags: [
-        {
-          name: "description",
-          content: "Chris Corchado - Portfolio and Resume"
-        },
-        {
-          property: "og:description",
-          content: "Chris Corchado - Portfolio and Resume"
-        }
-      ]
-    }
+    component: Home
   },
   {
     path: "/history",
