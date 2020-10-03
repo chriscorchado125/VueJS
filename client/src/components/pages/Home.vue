@@ -1,14 +1,14 @@
 <template lang="pug">
 
-  main.container.homepage(role="main")
-  
+  main.container.homepage(role="main" v-if="dataLoaded")
+
     h1(id='content' tabindex="12") About Me
 
     if error
       p #{ error }
 
     span(v-html="this.homeDescription")
-    
+
 </template>
 
 <script lang="ts">
@@ -19,6 +19,7 @@ import HomeService from "./../../services/HomeService";
 @Component
 export default class Home extends Vue {
   data: Array<any> = [];
+  dataLoaded = false;
   error = "";
   homeDescription = "";
 
@@ -27,6 +28,7 @@ export default class Home extends Vue {
       this.data = await HomeService.getHome();
       this.$store.commit("setRecords", this.data);
       this.homeDescription = this.data[0].home.description;
+      this.dataLoaded = true;
     } catch (err) {
       this.error = err.message;
     }

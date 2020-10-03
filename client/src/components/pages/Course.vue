@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  main.container(role="main")
+  main.container(role="main" v-if="dataLoaded")
 
     div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
 
@@ -45,6 +45,7 @@ import highlightSearch from "./../../ts/highlightSearch";
 @Component
 export default class Course extends Vue {
   data: Array<object> = [];
+  dataLoaded = false;
   error = "";
   query = this.$store.state.search;
   tabCount = 20;
@@ -53,6 +54,7 @@ export default class Course extends Vue {
     try {
       this.data = await CourseService.getCourse();
       this.$store.commit("setRecords", this.data);
+      this.dataLoaded = true;
       getLightboxCode();
     } catch (err) {
       this.error = err.message;

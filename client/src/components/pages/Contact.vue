@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  main.container(role="main")
+  main.container(role="main" v-if="dataLoaded")
 
     div#contact.container.contact-form
 
@@ -8,7 +8,7 @@
 
       if error
         p #{ error }
-   
+
       span(v-html="formHTML")
 
 </template>
@@ -21,6 +21,7 @@ import ContactService from "./../../services/ContactService";
 @Component
 export default class Contact extends Vue {
   data: any = [];
+  dataLoaded = false;
   error = "";
   formHTML = "";
 
@@ -29,6 +30,7 @@ export default class Contact extends Vue {
       this.data = await ContactService.getContact();
       this.$store.commit("setRecords", this.data);
       this.formHTML = this.getForm(this.data.data);
+      this.dataLoaded = true;
     } catch (err) {
       this.error = err.message;
     }
