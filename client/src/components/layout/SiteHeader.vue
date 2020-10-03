@@ -45,20 +45,23 @@ export default class SiteHeader extends Vue {
   homeSelected = "";
 
   created() {
-    // home link uses a dashed border style around the logo
-    // the other link styles are set in the router using linkActiveClass: "nav-item-active"
-    if (this.$route.name == "Index") {
-      this.homeSelected = "homeSelected";
-    } else {
-      this.homeSelected = "";
-    }
-
+    this.setHomeLogo();
     this.setMetaTags();
   }
 
   get pageIsSearchable() {
     if (this.$route.name == "Index" || this.$route.name == "Contact") return false;
     return true;
+  }
+
+  // home link uses a dashed border style around the logo
+  // the other link styles are set in the router using linkActiveClass: "nav-item-active"
+  setHomeLogo() {
+    if (this.$route.name == "Index") {
+      this.homeSelected = "homeSelected";
+    } else {
+      this.homeSelected = "";
+    }
   }
 
   setMetaTags() {
@@ -90,6 +93,8 @@ export default class SiteHeader extends Vue {
     if (!value.query.page) {
       this.$store.commit("setPageNum", 1);
     }
+
+    this.setHomeLogo();
   }
 }
 </script>
