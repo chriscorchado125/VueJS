@@ -18,10 +18,6 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 
-import HistoryService from "./../services/HistoryService";
-import CourseService from "./../services/CourseService";
-import ProjectService from "./../services/ProjectService";
-
 import getCookie from "./../ts/getCookie";
 
 @Component
@@ -71,33 +67,6 @@ export default class SitePagination extends Vue {
       console.log(err);
     });
 
-    let pageData = "";
-
-    switch (this.$route.name) {
-      case "Courses":
-        pageData = await CourseService.getCourse(
-          value,
-          this.direction,
-          this.$store.state.search
-        );
-        break;
-      case "History":
-        pageData = await HistoryService.getHistory(
-          value,
-          this.direction,
-          this.$store.state.search
-        );
-        break;
-      case "Projects":
-        pageData = await ProjectService.getProject(
-          value,
-          this.direction,
-          this.$store.state.search
-        );
-        break;
-    }
-
-    this.$store.commit("setRecords", pageData);
     this.activateNav = true;
   }
 }

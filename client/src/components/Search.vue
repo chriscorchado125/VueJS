@@ -22,12 +22,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
-import debounce from "./../ts/debounce";
+
 import SitePagination from "@/components/SitePagination.vue";
 
-import HistoryService from "./../services/HistoryService";
-import CourseService from "./../services/CourseService";
-import ProjectService from "./../services/ProjectService";
+import debounce from "./../ts/debounce";
 
 @Component({
   components: {
@@ -86,39 +84,11 @@ export default class Search extends Vue {
   // search data
   @Watch("$route")
   async onPropertyChanged(value: any, oldValue: any) {
-    let pageData = "";
-
     // clear search when navigating between pages - name is the route
     if (value.name !== oldValue.name) {
       this.searchFor = "";
       this.$store.commit("setSearchedFor", "");
     }
-
-    switch (this.$route.name) {
-      case "Courses":
-        pageData = await CourseService.getCourse(
-          this.$route.query.page,
-          this.$route.query.dir,
-          this.$store.state.search
-        );
-        break;
-      case "History":
-        pageData = await HistoryService.getHistory(
-          this.$route.query.page,
-          this.$route.query.dir,
-          this.$store.state.search
-        );
-        break;
-      case "Projects":
-        pageData = await ProjectService.getProject(
-          this.$route.query.page,
-          this.$route.query.dir,
-          this.$store.state.search
-        );
-        break;
-    }
-
-    this.$store.commit("setRecords", pageData);
   }
 }
 </script>

@@ -32,7 +32,10 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
+
 import HistoryService from "./../../services/HistoryService";
+
 import getMonthYear from "./../../ts/getMonthYear";
 import highlightSearch from "./../../ts/highlightSearch";
 
@@ -72,6 +75,16 @@ export default class History extends Vue {
   getMonthYear = getMonthYear;
 
   highlightSearch = highlightSearch;
+
+  @Watch("$route")
+  async onPropertyChanged(value: any, oldValue: any) {
+    this.data = await HistoryService.getHistory(
+      value.query.page,
+      this.$route.query.dir,
+      this.$store.state.search
+    );
+    this.$store.commit("setRecords", this.data);
+  }
 }
 </script>
 

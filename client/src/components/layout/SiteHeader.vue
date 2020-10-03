@@ -31,6 +31,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
+
 import SearchComponent from "@/components/Search.vue";
 import ProfileComponent from "@/components/Profile.vue";
 

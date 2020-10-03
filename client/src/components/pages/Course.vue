@@ -37,7 +37,10 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
+
 import CourseService from "./../../services/CourseService";
+
 import getMonthYear from "./../../ts/getMonthYear";
 import getLightboxCode from "./../../ts/getLightboxCode";
 import highlightSearch from "./../../ts/highlightSearch";
@@ -79,6 +82,16 @@ export default class Course extends Vue {
   getMonthYear = getMonthYear;
 
   highlightSearch = highlightSearch;
+
+  @Watch("$route")
+  async onPropertyChanged(value: any, oldValue: any) {
+    this.data = await CourseService.getCourse(
+      value.query.page,
+      this.$route.query.dir,
+      this.$store.state.search
+    );
+    this.$store.commit("setRecords", this.data);
+  }
 }
 </script>
 
