@@ -67,7 +67,7 @@ export default class Search extends Vue {
     this.$store.commit("setSearchedFor", "");
     this.$store.commit("setPageNum", 1);
 
-    this.$router.push({ path: window.location.pathname }).catch((err) => {
+    this.$router.push({ path: this.$route.path }).catch((err) => {
       console.log(err);
     });
   }
@@ -77,7 +77,7 @@ export default class Search extends Vue {
     this.$store.commit("setPageNum", 1);
 
     this.$router
-      .push({ path: window.location.pathname + "?q=" + this.searchFor })
+      .push({ path: this.$route.path + "?q=" + this.searchFor })
       .catch((err) => {
         console.log(err);
       });

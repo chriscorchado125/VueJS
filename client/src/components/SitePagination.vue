@@ -63,7 +63,7 @@ export default class SitePagination extends Vue {
 
   @Watch("currentPageNum")
   async onPropertyChanged(value: string, oldValue: string) {
-    let queryString = location.pathname + "?page=" + value;
+    let queryString = this.$route.path + "?page=" + value;
     if (this.direction) queryString += "&dir=" + this.direction;
     if (this.$store.state.search) queryString += "&q=" + this.$store.state.search;
 
