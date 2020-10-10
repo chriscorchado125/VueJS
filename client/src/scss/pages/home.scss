@@ -97,3 +97,31 @@
   margin-bottom: 0px;
   font-weight: bold;
 }
+
+.shadow-version a img {
+  padding: 0 !important;
+}
+
+.jira-versions {
+  text-align: center;
+  img {
+    max-width: 185px;
+    box-shadow: 1px 1px 15px 1px #888888;
+    margin: 10px;
+  }
+}
+
+.homepage-wrapper ul li {
+  padding: 5px;
+}
+
+#html5-text,
+#nodejs-text,
+#vuejs-text,
+#drupal8-text {
+  display: none;
+}
+
+#vuejs-text {
+  display: inline-block;
+}
