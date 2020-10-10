@@ -30,6 +30,13 @@ export default class Home extends Vue {
       this.$store.commit("setRecords", this.data);
       this.homeDescription = this.data[0].home.description;
       this.dataLoaded = true;
+
+      setTimeout(function() {
+        document.getElementById("html5-text").style.display = "none";
+        document.getElementById("nodejs-text").style.display = "none";
+        document.getElementById("vuejs-text").style.display = "inline-block";
+        document.getElementById("drupal8-text").style.display = "none";
+      }, 500);
     } catch (err) {
       this.error = err.message;
     }
