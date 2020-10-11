@@ -19,7 +19,7 @@
 @media (max-width: 1182px) {
   .container {
     max-width: 960px;
-    padding: 20px 10px !important;
+    padding: 20px 45px !important;
   }
 }
 
@@ -39,9 +39,6 @@
   .container {
     padding: 15px 5px;
     max-width: 550px;
-    p {
-      padding: 5px;
-    }
   }
 }
 
@@ -52,9 +49,6 @@
 }
 
 @media (max-width: 600px) {
-  p {
-    padding: 5px 40px;
-  }
   .site-versions div {
     padding: 0px 10px;
   }

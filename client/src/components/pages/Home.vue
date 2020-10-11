@@ -32,11 +32,9 @@ export default class Home extends Vue {
       this.dataLoaded = true;
 
       setTimeout(function() {
-        document.getElementById("html5-text").style.display = "none";
-        document.getElementById("nodejs-text").style.display = "none";
-        document.getElementById("vuejs-text").style.display = "inline-block";
-        document.getElementById("drupal8-text").style.display = "none";
-      }, 500);
+        const vuejsText = document.getElementById("vuejs-text")!;
+        vuejsText.style.display = "inline-block";
+      }, 10);
     } catch (err) {
       this.error = err.message;
     }
