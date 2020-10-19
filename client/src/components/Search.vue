@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  div#search-container(role="search" :class="containerStyle")
+  form#search-container(role="search" :class="containerStyle")
 
     - let counter = 6
 
@@ -19,13 +19,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Watch } from 'vue-property-decorator';
 
-import SitePagination from "@/components/SitePagination.vue";
+import SitePagination from '@/components/SitePagination.vue';
 
-import debounce from "./../ts/debounce";
+import debounce from './../ts/debounce';
 
 @Component({
   components: {
@@ -33,8 +33,8 @@ import debounce from "./../ts/debounce";
   }
 })
 export default class Search extends Vue {
-  searchFor: any = "";
-  containerStyle = "paginationNo";
+  searchFor: any = '';
+  containerStyle = 'paginationNo';
 
   mounted() {
     this.setContainerStyle();
@@ -49,21 +49,21 @@ export default class Search extends Vue {
       this.$store.state.pageRecordCount == this.$store.state.maxRecords ||
       this.$store.state.pageNum > 1
     ) {
-      this.containerStyle = "paginationNo";
+      this.containerStyle = 'paginationNo';
     } else {
-      this.containerStyle = "paginationYes";
+      this.containerStyle = 'paginationYes';
     }
   }
 
   searchFilter() {
-    this.searchFor = this.searchFor.replace(/[^A-Z ]/gi, "");
-    this.$store.commit("setSearchedFor", this.searchFor);
+    this.searchFor = this.searchFor.replace(/[^A-Z ]/gi, '');
+    this.$store.commit('setSearchedFor', this.searchFor);
   }
 
   clearSearch() {
-    this.searchFor = "";
-    this.$store.commit("setSearchedFor", "");
-    this.$store.commit("setPageNum", 1);
+    this.searchFor = '';
+    this.$store.commit('setSearchedFor', '');
+    this.$store.commit('setPageNum', 1);
 
     this.$router.push({ path: this.$route.path }).catch((err) => {
       console.log(err);
@@ -71,28 +71,28 @@ export default class Search extends Vue {
   }
 
   debounceMe = debounce(() => {
-    this.searchFor = this.$store.state.search.replace(/[^A-Z ]/gi, "");
-    this.$store.commit("setPageNum", 1);
+    this.searchFor = this.$store.state.search.replace(/[^A-Z ]/gi, '');
+    this.$store.commit('setPageNum', 1);
 
     this.$router
-      .push({ path: this.$route.path + "?q=" + this.searchFor })
+      .push({ path: this.$route.path + '?q=' + this.searchFor })
       .catch((err) => {
         console.log(err);
       });
   }, 500);
 
   // search data
-  @Watch("$route")
+  @Watch('$route')
   async onPropertyChanged(value: any, oldValue: any) {
     // clear search when navigating between pages - name is the route
     if (value.name !== oldValue.name) {
-      this.searchFor = "";
-      this.$store.commit("setSearchedFor", "");
+      this.searchFor = '';
+      this.$store.commit('setSearchedFor', '');
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "./../scss/header/search.scss";
+@import './../scss/header/search.scss';
 </style>
