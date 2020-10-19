@@ -1,4 +1,4 @@
-@import "./../variables.scss";
+@import './../variables.scss';
 
 .homeSelected {
   border: 1px dashed $main_color;
@@ -6,9 +6,10 @@
 
 .container {
   padding: 20px 50px;
+  min-width: 1140px;
   h1 {
     margin-top: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
   }
 }
 
