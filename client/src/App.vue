@@ -29,7 +29,7 @@ export default class App extends Vue {}
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.1s;
+  transition: opacity 0.05s;
 }
 
 .fade-enter,
