@@ -13,7 +13,7 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "baseUrl": ".",
-    "types": ["webpack-env", "jest"],
+    "types": ["webpack-env", "jest", "jQuery", "jquery", "$"],
     "paths": {
       "@/*": ["src/*"]
     },

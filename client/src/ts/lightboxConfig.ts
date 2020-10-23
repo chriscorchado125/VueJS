@@ -1,9 +1,6 @@
 import $ from 'jquery'
-import jquery from 'jquery'
-import jQuery from 'jquery'
 
 const lightboxConfig = () => {
-  //console.log($("a.gallery"))
 
   $("a.gallery").featherlightGallery({
     previousIcon: "<img src='https://chriscorchado.com/lightbox/images/left-arrow.png' alt='Prev' />" /* &#dsfsd; was used as previous icon */,
@@ -12,4 +9,5 @@ const lightboxConfig = () => {
     galleryFadeOut: 300 /* fadeOut speed before slide is loaded */
   });
 }
+
 export default lightboxConfig;
