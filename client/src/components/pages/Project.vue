@@ -15,9 +15,9 @@
 
         div.project-title(v-html="highlightSearch(item.project.name, query)" :tabIndex="tabIndex")
 
-        span.project-company(v-html="highlightSearch(item.project.company_name, query)" :tabIndex="tabIndex")
+        div.project-company(:tabIndex="tabIndex") {{ highlightSearch(item.project.company_name, query) }}
 
-        span.project-date(:tabIndex="tabIndex") {{ getMonthYear(item.project.project_date, 'yearOnly') }}
+          span.project-date(:tabIndex="tabIndex")  ({{ getMonthYear(item.project.project_date, 'yearOnly') }})
 
         div.body-container(v-html="highlightSearch(item.project.description, query)" :tabIndex="tabIndex")
 
