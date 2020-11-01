@@ -48,7 +48,7 @@ export default class Contact extends Vue {
   }
 
   getForm(data) {
-    let form = data.substr(data.indexOf("<form"), data.indexOf("</form>"));
+    let form = data.substr(data.indexOf("<form class="), data.indexOf("</form>"));
     form = form.substr(0, form.indexOf("</form>") + 8);
     form = form.replace("Your email address", "Email");
 
