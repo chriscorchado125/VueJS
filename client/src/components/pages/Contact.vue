@@ -4,7 +4,7 @@
 
     div#contact.container.contact-form
 
-      h1(id='content' tabindex="12")  Contact
+      h1(id='content')  Contact
 
       if error
         p #{ error }

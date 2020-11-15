@@ -13,9 +13,9 @@
       div
         img(alt="mongoDB Icon" title="mongoDB for the database" src="https://chriscorchado.com/images/mongodb.png")
       div
-        img(alt="mongoose Icon" title="mongoose to connect to the mongoDB database" src="https://chriscorchado.com/images/mongoose.png")        
+        img(alt="mongoose Icon" title="mongoose to connect to the mongoDB database" src="https://chriscorchado.com/images/mongoose.png")
       div
-        img(alt="TypeScript Icon" title="TypeScript for Javascript functionality" src="https://chriscorchado.com/images/typescript.png")      
+        img(alt="TypeScript Icon" title="TypeScript for Javascript functionality" src="https://chriscorchado.com/images/typescript.png")
       div
         img(alt="SASS Icon"  title="SASS for the CSS look and feel styles" src="https://chriscorchado.com/images/sass.png")
       div
@@ -25,7 +25,7 @@
       div
         a(href="https://github.com/chriscorchado125/VueJS" target="_blank")
           img(alt="Github Icon" title="View the code on Github" src="https://chriscorchado.com/images/github.jpg")
-          
+
 </template>
 
 <script lang="ts">

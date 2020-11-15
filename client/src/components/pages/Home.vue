@@ -2,7 +2,7 @@
 
   main.container.homepage(role="main" v-if="dataLoaded")
 
-    h1(id='content' tabindex="12") About Me
+    h1(id='content') About Me
 
     if error
       p #{ error }

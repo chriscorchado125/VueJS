@@ -4,7 +4,7 @@
 
     div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{ query }}'
 
-    h1(v-else id='content' tabindex="12") Projects
+    h1(v-else id='content') Projects
 
     if error
       p #{ error }
@@ -13,13 +13,13 @@
 
       div.project.col(v-for="item in this.$store.state.pageRecords" :key="item._id")
 
-        div.project-title(v-html="highlightSearch(item.project.name, query)" :tabIndex="tabIndex")
+        div.project-title(v-html="highlightSearch(item.project.name, query)")
 
-        div.project-company(:tabIndex="tabIndex") {{ highlightSearch(item.project.company_name, query) }}
+        div.project-company {{ highlightSearch(item.project.company_name, query) }}
 
-          span.project-date(:tabIndex="tabIndex")  ({{ getMonthYear(item.project.project_date, 'yearOnly') }})
+          span.project-date  ({{ getMonthYear(item.project.project_date, 'yearOnly') }})
 
-        div.body-container(v-html="highlightSearch(item.project.description, query)" :tabIndex="tabIndex")
+        div.body-container(v-html="highlightSearch(item.project.description, query)")
 
         section(:class="setScreenshotClass(item.project.screenshots.length)" data-featherlight-gallery="" data-featherlight-filter="a")
 
@@ -27,17 +27,17 @@
 
             a.gallery(:href="setScreenshots(screenshot)[1]")
 
-              div.project-item-desc(v-html="highlightSearch(setScreenshots(screenshot)[0], query)" :tabIndex="tabIndex")
+              div.project-item-desc(v-html="highlightSearch(setScreenshots(screenshot)[0], query)")
 
               img(loading="lazy" :src="setScreenshots(screenshot)[1]" :alt="setScreenshots(screenshot)[0]")
 
         span(v-if="item.project.videos !== ''" title="Play Video")
 
-          a.play-video(:href="encodeVideoName(item.project.videos, item.project.name)" target="_blank" :tabIndex="tabIndex") Play Video
+          a.play-video(:href="encodeVideoName(item.project.videos, item.project.name)" target="_blank") Play Video
 
             img(loading="lazy" src="https://chriscorchado.com/images/play_video_new_window_icon.png" alt="Play Video Icon" width="20")
 
-        div.project-technology(v-html="highlightSearch(item.project.technology, query)" :tabIndex="tabIndex")
+        div.project-technology(v-html="highlightSearch(item.project.technology, query)")
 
 </template>
 

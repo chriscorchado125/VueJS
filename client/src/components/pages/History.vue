@@ -13,19 +13,19 @@
 
       div.company-container.col.shadow(v-for="(item, index) in this.$store.state.pageRecords" :key="item._id")
 
-        div.company-name(v-html="highlightSearch(item.history.name, query)" :tabIndex="tabIndex")
+        div.company-name(v-html="highlightSearch(item.history.name, query)")
 
-        div.company-job-title(v-html="highlightSearch(item.history.job_title, query)" :tabIndex="tabIndex")
+        div.company-job-title(v-html="highlightSearch(item.history.job_title, query)")
 
-        div.body-container(v-html="highlightSearch(item.history.description, query)" :tabIndex="tabIndex")
+        div.body-container(v-html="highlightSearch(item.history.description, query)")
 
         div.screenshot-container
 
-          img(loading=lazy :src="item.history.screenshots" class="company-screenshot" :alt="item.history.name" :tabIndex="tabIndex")
+          img(loading=lazy :src="item.history.screenshots" class="company-screenshot" :alt="item.history.name")
 
-          div.employment-dates(v-if="item.history.end_date" :tabIndex="tabIndex") {{ getMonthYear(item.history.start_date) }} -  {{ getMonthYear(item.history.end_date) }}
+          div.employment-dates(v-if="item.history.end_date") {{ getMonthYear(item.history.start_date) }} -  {{ getMonthYear(item.history.end_date) }}
 
-          div.employment-dates(v-else="item.history.end_date" :tabIndex="tabIndex") {{ getMonthYear(item.history.start_date) }} -  null
+          div.employment-dates(v-else="item.history.end_date") {{ getMonthYear(item.history.start_date) }} -  null
 
 </template>
 

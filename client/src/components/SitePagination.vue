@@ -2,10 +2,10 @@
 
     div#pagination(v-if="this.$store.state.pageNum > 1 || nextLinkValue()")
 
-      a.pager-navigation(v-if="this.$store.state.pageNum > 1 && activateNav" @click="pageRecords('prev')" href="#" id="prevLink" title="View the previous page" role='button' tabindex='9') Prev
+      a.pager-navigation(v-if="this.$store.state.pageNum > 1 && activateNav" @click="pageRecords('prev')" href="#" id="prevLink" title="View the previous page" role='button') Prev
       span.pager-navigation.disabled(v-else title="There is no previous page available" role='button') Prev
 
-      a.pager-navigation(v-if="nextLinkValue() && activateNav" @click="pageRecords('next')" href="#" id="nextLink" title="View the next page" role='button' tabindex='10') Next
+      a.pager-navigation(v-if="nextLinkValue() && activateNav" @click="pageRecords('next')" href="#" id="nextLink" title="View the next page" role='button') Next
       span.pager-navigation.disabled(v-else title="There is no next page available" role='button') Next
 
     if error
