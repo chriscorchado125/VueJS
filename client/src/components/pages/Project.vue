@@ -33,7 +33,7 @@
 
         span(v-if="item.project.videos !== ''" title="Play Video")
 
-          a.play-video(:href="encodeVideoName(item.project.videos, item.project.name)" target="_blank") Play Video
+          a.play-video(:href="encodeVideoName(item.project.videos, item.project.name)" target="_blank" rel="noopener" title="Opens in a new window") Play Video
 
             img(loading="lazy" src="https://chriscorchado.com/images/play_video_new_window_icon.png" alt="Play Video Icon" width="20")
 
@@ -58,7 +58,6 @@ export default class Project extends Vue {
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
-  tabCount = 20;
 
   async created() {
     try {
@@ -69,11 +68,6 @@ export default class Project extends Vue {
     } catch (err) {
       this.error = err.message;
     }
-  }
-
-  get tabIndex() {
-    this.tabCount++;
-    return this.tabCount;
   }
 
   mounted() {

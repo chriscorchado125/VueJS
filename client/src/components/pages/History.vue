@@ -4,7 +4,7 @@
 
     div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
 
-    h1(v-else id='content' tabindex="12") History
+    h1(v-else id='content') History
 
     if error
       p #{ error }
@@ -45,7 +45,6 @@ export default class History extends Vue {
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
-  tabCount = 20;
 
   async created() {
     try {
@@ -55,11 +54,6 @@ export default class History extends Vue {
     } catch (err) {
       this.error = err.message;
     }
-  }
-
-  get tabIndex() {
-    this.tabCount++;
-    return this.tabCount;
   }
 
   mounted() {

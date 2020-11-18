@@ -4,6 +4,10 @@
   height: 60px;
 }
 
+#logo > img:hover {
+  border: 1px dashed $main_color;
+}
+
 #navbarCollapse {
   max-width: 1100px;
   margin: auto;
@@ -11,12 +15,11 @@
 
 .navbar {
   border-bottom: 2px solid $main_color;
-  display: block;
-  min-height: 80px;
 
   /* force nav to stay horizontal */
   .navbar-nav {
     flex-direction: row;
+    height: 70px !important;
 
     /* align items vertically*/
     .nav-item {
@@ -34,6 +37,10 @@
     }
   }
 } // .navbar
+
+.navbar-light .navbar-nav a {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
 
 @media (max-width: 700px) {
   .navbar-nav {

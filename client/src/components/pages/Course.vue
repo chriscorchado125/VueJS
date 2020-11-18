@@ -24,12 +24,12 @@
 
           span.course-links
 
-            a(:href="item.course.certificate_pdf" target='_blank')
+            a(:href="item.course.certificate_pdf" target='_blank' rel="noopener" title="Opens in a new window")
               img(loading=lazy src="https://chriscorchado.com/images/pdfIcon.jpg" height="25" title="View the PDF Certificate" alt="PDF Icon")
 
           span.course-links(v-if="item.course.track_image")
 
-            a(:href="item.course.track_image" target='_blank' data-featherlight="image")
+            a(:href="item.course.track_image" target='_blank' data-featherlight="image" rel="noopener" title="Opens in a new window")
                 img(loading=lazy src="https://chriscorchado.com/images/linkedIn-track.png" height="25" title="View the Courses in the Track" alt="Trophy Icon")
 
 </template>
@@ -51,7 +51,6 @@ export default class Course extends Vue {
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
-  tabCount = 20;
 
   async created() {
     try {
@@ -62,11 +61,6 @@ export default class Course extends Vue {
     } catch (err) {
       this.error = err.message;
     }
-  }
-
-  get tabIndex() {
-    this.tabCount++;
-    return this.tabCount;
   }
 
   mounted() {

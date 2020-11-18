@@ -23,7 +23,7 @@
       div
         img(alt="HTML5 Icon" title="HTML5 for overall structure" src="https://chriscorchado.com/images/html5.jpg")
       div
-        a(href="https://github.com/chriscorchado125/VueJS" target="_blank")
+        a(href="https://github.com/chriscorchado125/VueJS" target="_blank" rel="noopener" title="Opening a new window")
           img(alt="Github Icon" title="View the code on Github" src="https://chriscorchado.com/images/github.jpg")
 
 </template>

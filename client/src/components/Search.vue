@@ -1,23 +1,21 @@
 <template lang="pug">
 
-  form#search-container(role="search" :class="containerStyle" onClick="return false")
-
-    - let counter = 6
+  form#search-container(role="search" :class="containerStyle" method="get" class="paginationNo" accept-charset="UTF-8" onClick="return false")
 
     span#searchCount(v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
 
-    label
+    label(for="searchSite")
       span.screen-reader Enter Search
-      input(type="search" id="searchSite" @keypress="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Search" placeholder="Search items")
+      input(type="search" id="searchSite" @keypress="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Enter search term" aria-required="true" maxlength="128" placeholder="Search items")
 
-    label
+    label(for="searchSubmit")
       span.screen-reader Search
-      button(id="searchBtn" class="searchBtn" @click="search()"  aria-label="Search" title="search" role="button") Search
+      button(type="submit" id="searchSubmit" class="searchBtn" @click="search()"  aria-label="Search" title="search" role="button") Search
 
 
-    label
+    label(for="searchClear")
       span.screen-reader Clear Search
-      button(id="searchBtn" class="searchBtn" @click="clearSearch()"  aria-label="Clear Search" title="Clear search" role="button") Clear
+      button(type="reset" id="searchClear" class="searchBtn" @click="clearSearch()" aria-label="Clear Search" value="Clear" title="Clear search" role="button") Clear
 
     <site-pagination />
 
