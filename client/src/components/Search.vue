@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  form#search-container(role="search" :class="containerStyle" method="get" class="paginationNo" accept-charset="UTF-8" onClick="return false")
+  form#search-container(role="search" :class="containerStyle" method="get" accept-charset="UTF-8" onClick="return false")
 
     span#searchCount(v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
 
@@ -50,9 +50,9 @@ export default class Search extends Vue {
       this.$store.state.pageRecordCount == this.$store.state.maxRecords ||
       this.$store.state.pageNum > 1
     ) {
-      this.containerStyle = "paginationNo";
-    } else {
       this.containerStyle = "paginationYes";
+    } else {
+      this.containerStyle = "paginationNo";
     }
   }
 
@@ -96,4 +96,5 @@ export default class Search extends Vue {
 
 <style scoped lang="scss">
 @import "./../scss/header/search.scss";
+@import "./../scss/header/pagination.scss";
 </style>
