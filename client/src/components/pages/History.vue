@@ -58,7 +58,7 @@ export default class History extends Vue {
 
   mounted() {
     const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - History - Portfolio and Resume";
+    titleEl.textContent = "Chris Corchado - Work History";
   }
 
   // needed for the highlight search to work

@@ -72,7 +72,7 @@ export default class Project extends Vue {
 
   mounted() {
     const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Projects - Portfolio and Resume";
+    titleEl.textContent = "Chris Corchado - Project Samples";
   }
 
   // needed for the highlight search to work

@@ -39,7 +39,7 @@ export default class Contact extends Vue {
 
   mounted() {
     const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Contact Me - Portfolio and Resume";
+    titleEl.textContent = "Chris Corchado - Contact Me";
   }
 
   updated() {

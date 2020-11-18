@@ -65,7 +65,7 @@ export default class Course extends Vue {
 
   mounted() {
     const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Courses - Portfolio and Resume";
+    titleEl.textContent = "Chris Corchado - Courses Taken";
   }
 
   // needed for the highlight search to work

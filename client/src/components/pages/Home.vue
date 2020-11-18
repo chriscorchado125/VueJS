@@ -42,7 +42,7 @@ export default class Home extends Vue {
 
   mounted() {
     const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Homepage - Portfolio and Resume";
+    titleEl.textContent = "Chris Corchado - About Me";
   }
 }
 </script>
