@@ -28,8 +28,8 @@ export default new Vuex.Store({
       // TODO: fix next link to replace state.pageRecordCount == state.maxRecords
       if (state.pageRecordCount == state.maxRecords || state.pageNum > 1) {
         const firstRange = state.maxRecords * state.pageNum;
-        const secondRange = state.maxRecords * (state.pageNum - 1);
-        const lastRange = secondRange + state.pageRecordCount;
+        const secondRange = (state.maxRecords * (state.pageNum - 1)) + 1;
+        const lastRange = (secondRange + state.pageRecordCount) - 1;
 
         if (state.pageNum === 1) {
           // first page
