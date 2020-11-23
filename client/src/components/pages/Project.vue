@@ -15,7 +15,7 @@
 
         div.project-title(v-html="highlightSearch(item.project.name, query)")
 
-        div.project-company {{ highlightSearch(item.project.company_name, query) }}
+        div.project-company(v-html="highlightSearch(item.project.company_name, query)")
 
           span.project-date  ({{ getMonthYear(item.project.project_date, 'yearOnly') }})
 
