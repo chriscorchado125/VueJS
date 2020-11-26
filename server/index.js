@@ -13,11 +13,13 @@ const home = require("./routes/api/home");
 const history = require("./routes/api/history");
 const course = require("./routes/api/course");
 const project = require("./routes/api/project");
+const resume = require("./routes/api/resume");
 
 app.use("/api/home", home);
 app.use("/api/history", history);
 app.use("/api/course", course);
 app.use("/api/project", project);
+app.use("/api/resume", resume);
 
 app.set("view engine", "pug");
 

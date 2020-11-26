@@ -3,8 +3,8 @@
   div#profiles
 
     div#pdf-resume.icon
-      a(href="https://chriscorchado.com/resume/Chris-Corchado-resume-2020.pdf" target="_blank" rel="noopener" title="Opening a new window")
-        img(alt="Link to PDF Resume" src="https://chriscorchado.com/images/pdfIcon.jpg")
+      a(href="/resume")
+        img(alt="Link to HTML Resume with PDF and Word options" src="https://chriscorchado.com/images/htmlIcon.jpg")
         span Resume
 
     div#profile-linkedin.icon

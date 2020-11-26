@@ -23,6 +23,8 @@
 
           <profile-component v-if='this.$route.name == "Index" || this.$route.name == "Contact"' />
 
+          <resume-component v-if='this.$route.name == "Resume"' />
+
           <search-component v-if='pageIsSearchable' />
 
 </template>
@@ -34,11 +36,13 @@ import { Watch } from "vue-property-decorator";
 
 import SearchComponent from "@/components/Search.vue";
 import ProfileComponent from "@/components/Profile.vue";
+import ResumeComponent from "@/components/ResumeOptions.vue";
 
 @Component({
   components: {
     SearchComponent,
-    ProfileComponent
+    ProfileComponent,
+    ResumeComponent
   }
 })
 export default class SiteHeader extends Vue {
@@ -55,7 +59,7 @@ export default class SiteHeader extends Vue {
   }
 
   get pageIsSearchable() {
-    if (this.$route.name == "Index" || this.$route.name == "Contact") return false;
+    if (this.$route.name == "Index" || this.$route.name == "Contact"  || this.$route.name == "Resume") return false;
     return true;
   }
 

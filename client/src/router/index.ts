@@ -7,6 +7,7 @@ import History from "../views/History.vue";
 import Course from "../views/Course.vue";
 import Project from "../views/Project.vue";
 import Contact from "../views/Contact.vue";
+import Resume from "../views/Resume.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueMeta);
@@ -36,6 +37,11 @@ const routes: Array<RouteConfig> = [
     path: "/contact",
     name: "Contact",
     component: Contact
+  },
+  {
+    path: "/resume",
+    name: "Resume",
+    component: Resume
   }
 ];
 
