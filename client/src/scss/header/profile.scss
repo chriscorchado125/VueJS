@@ -4,7 +4,7 @@
   float: right;
   max-width: 380px;
   font-size: 12px;
-  text-align: center;
+  text-align: center !important;
   margin-top: -60px;
 
   .icon {
@@ -12,8 +12,9 @@
     width: 50px;
     padding: 0 5px;
     margin: 0 5px;
-
     img {
+      display: block;
+      margin: auto;
       height: 30px;
     }
   }
@@ -36,7 +37,6 @@
     margin: 0;
     float: none;
     max-width: 100%;
-    text-align: center;
     font-size: 11px;
 
     .icon {
@@ -51,8 +51,9 @@
   #profiles {
     margin: -6px 0 5px 0;
     .icon {
+      width: 50px;
       img {
-        height: 15px;
+        height: 15px !important;
       }
     }
   }
