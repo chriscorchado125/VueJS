@@ -15,11 +15,12 @@
 
 .navbar {
   border-bottom: 2px solid $main_color;
+  display: block;
+  min-height: 80px;
 
   /* force nav to stay horizontal */
   .navbar-nav {
     flex-direction: row;
-    height: 70px;
 
     /* align items vertically*/
     .nav-item {
@@ -55,9 +56,6 @@
 }
 
 @media (max-width: 500px) {
-  .navbar-nav {
-    height: 60px !important;
-  }
   #logo img {
     height: 50px;
   }
@@ -65,7 +63,7 @@
 
 @media (max-width: 400px) {
   #logo img {
-    margin-left: 10px;
+    margin: 0 0 0 10px;
   }
   .navbar {
     .navbar-nav {
