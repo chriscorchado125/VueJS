@@ -24,21 +24,24 @@ export default class Resume extends Vue {
   error = "";
   resumeHTML = "";
 
-  async created() {
+  async created(): Promise<void> {
     try {
       this.data = await ResumeService.getResume();
       this.$store.commit("setRecords", this.data);
       this.resumeHTML = this.data[0].home.html;
       this.dataLoaded = true;
-
     } catch (err) {
       this.error = err.message;
     }
   }
 
-  mounted() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Resume";
+  mounted(): void {
+    if (document.querySelector("head title")) {
+      const titleEl = document.querySelector("head title");
+      if (titleEl) {
+        titleEl.textContent = "Resume | Chris Corchado";
+      }
+    }
   }
 }
 </script>

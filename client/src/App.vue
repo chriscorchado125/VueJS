@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <SiteHeader />
-    <!--keep-alive include="[History, Course, Project]"-->
-    <transition name="fade">
-      <router-view />
-    </transition>
-    <!--/keep-alive-->
+    <!--keep-alive include="[History, Course, Project]">
+    <transition name="fade"-->
+    <router-view />
+    <!--/transition>
+    </keep-alive-->
     <SiteFooter />
   </div>
 </template>
@@ -20,13 +20,14 @@ import SiteFooter from "@/components/layout/SiteFooter.vue";
 @Component({
   components: {
     SiteHeader,
-    SiteFooter
-  }
+    SiteFooter,
+  },
 })
 export default class App extends Vue {}
 </script>
 
 <style scoped>
+/*
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.05s;
@@ -36,4 +37,5 @@ export default class App extends Vue {}
 .fade-leave-to {
   opacity: 0;
 }
+*/
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <ResumeComponent />
+  <ResumeComponent />
 </template>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ import ResumeComponent from "@/components/pages/Resume.vue";
 
 @Component({
   components: {
-    ResumeComponent
-  }
+    ResumeComponent,
+  },
 })
 export default class Resume extends Vue {}
 </script>

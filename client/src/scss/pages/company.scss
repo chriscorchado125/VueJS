@@ -1,11 +1,7 @@
 @import "./../variables.scss";
 
-.container {
-  padding-bottom: 20px;
-  margin-bottom: 40px;
-  h1 {
-    margin-top: 100px;
-  }
+h1{
+  margin-bottom:30px;
 }
 
 .company {
@@ -13,9 +9,11 @@
   grid-template-columns: 30% 30% 30%;
   align-items: stretch;
   justify-content: space-evenly;
+  padding-top: 0;
+  margin-top: -2px !important;
 }
 
-/* individual company container */
+// Individual company container
 .company-container {
   border: 1px solid $item_bg_border;
   padding: 0 0 20px 0;
@@ -43,7 +41,7 @@
   background-color: $item_bg_color;
 }
 
-/* body text - the bullet items */
+// Body text - the bullet items
 .body-container {
   max-width: 400px;
   margin: 20px auto;
@@ -60,7 +58,7 @@
 .employment-dates {
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: 0; /* no unit */
   font-size: 12px;
   padding: 10px;
   background-color: $main_color_light;
@@ -75,6 +73,7 @@
   .container {
     grid-template-columns: 45% 45%;
   }
+
   .company-container {
     max-width: 455px;
   }
@@ -86,49 +85,19 @@
 
 @media (max-width: 900px) {
   .company {
-    grid-template-columns: 80%;
+    grid-template-columns: 90%;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .company {
-    margin-top: 0px;
-    padding: 0px;
-    background-color:blue p {
+    p {
       padding: 5px 20px;
     }
   }
 }
 
-@media (max-width: 750px) {
-  .container {
-    max-width: 540px;
-  }
-}
-
-@media (max-width: 700px) {
-  .container {
-    h1 {
-      margin-top: 95px !important;
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .container {
-    .project {
-      min-width: 350px;
-    }
-  }
-}
-
-@media (max-width: 550px) {
-  .container {
-    grid-template-columns: 1fr;
-    h1 {
-      margin-top: 95px !important;
-    }
-  }
+@media (max-width: 500px) {
   .company-screenshot {
     max-width: 250px;
   }
@@ -136,8 +105,9 @@
 
 @media (max-width: 400px) {
   .container .company {
-    padding-top: 10px !important;
+    padding-top: 10px;
   }
+
   .company-screenshot {
     max-width: 200px;
   }

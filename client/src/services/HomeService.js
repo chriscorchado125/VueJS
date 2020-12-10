@@ -1,19 +1,19 @@
-import axios from "axios";
+import axios from 'axios'
 
-const url = "api/home";
+const url = 'api/home'
 
 class HomeService {
-  static getHome() {
+  static getHome () {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url);
-        const data = res.data;
-        resolve(data.map((home) => ({ home })));
+        const res = await axios.get(url)
+        const data = res.data
+        resolve(data.map((home) => ({ home })))
       } catch (err) {
-        reject(err);
+        reject(err)
       }
-    });
+    })
   }
 }
 
-export default HomeService;
+export default HomeService

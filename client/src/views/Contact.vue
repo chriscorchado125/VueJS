@@ -1,5 +1,5 @@
 <template>
-    <ContactComponent />
+  <ContactComponent />
 </template>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ import ContactComponent from "@/components/pages/Contact.vue";
 
 @Component({
   components: {
-    ContactComponent
-  }
+    ContactComponent,
+  },
 })
 export default class Contact extends Vue {}
 </script>

@@ -28,7 +28,7 @@ export default class SitePagination extends Vue {
   //nextLink = getCookie("nextLink");
   activateNav = true;
 
-  created() {
+  created(): void {
     this.$store.commit("setMaxItemsPerPage", getCookie("maxItemsPerPage"));
   }
 
@@ -58,10 +58,11 @@ export default class SitePagination extends Vue {
   }
 
   @Watch("currentPageNum")
-  async onPropertyChanged(value: string, oldValue: string) {
+  async onPropertyChanged(value: string): Promise<void> {
     let queryString = this.$route.path + "?page=" + value;
     if (this.direction) queryString += "&dir=" + this.direction;
-    if (this.$store.state.search) queryString += "&q=" + this.$store.state.search;
+    if (this.$store.state.search)
+      queryString += "&q=" + this.$store.state.search;
 
     this.$router.push({ path: queryString }).catch((err) => {
       console.log(err);

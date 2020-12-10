@@ -5,61 +5,65 @@
  * @return {string} - search result with/without highlight
  */
 const highlightSearch = (itemToHighlight: string, searchedFor: string) => {
-  let dataToReturn = "";
+  let dataToReturn = ''
 
   if (searchedFor) {
-    const searchTerm = new RegExp(searchedFor, "gi");
-    let results = "";
+    const searchTerm = new RegExp(searchedFor, 'gi')
+    let results = ''
 
-    let searchString = "";
-    let searchStringArray: string[] = [];
+    let searchString = ''
+    let searchStringArray: string[] = []
 
     if (itemToHighlight && +itemToHighlight !== -1) {
-      searchString = itemToHighlight.replace("&amp;", "&").replace("&#039;", "'");
+      searchString = itemToHighlight
+        .replace('&amp;', '&')
+        .replace('&#039;', '\'')
     }
 
     /* check for HTML
      * TODO: use entities within Drupal to avoid adding body content with HTML
      */
-    if (searchString.indexOf("<ul>") !== -1) {
-      let listItem = "";
+    if (searchString.indexOf('<ul>') !== -1) {
+      let listItem = ''
 
-      const searchWithHTML = searchString.replace("<ul>", "").replace("</ul>", ""); // remove ul tags
-      searchStringArray = searchWithHTML.split("<li>"); // break the li items into an array
+      const searchWithHTML = searchString
+        .replace('<ul>', '')
+        .replace('</ul>', '') // remove ul tags
+      searchStringArray = searchWithHTML.split('<li>') // break the li items into an array
 
       searchStringArray.forEach((element) => {
         if (element.length > 3) {
-          searchString = element.slice(0, element.lastIndexOf("<")); // remove closing li tag
+          searchString = element.slice(0, element.lastIndexOf('<')) // remove closing li tag
 
           if (searchString.match(searchTerm)) {
             results = searchString.replace(
               searchTerm,
-              (match) => `<span class="highlightSearchText">${match}</span>`
-            );
+              (match) => `<span class='highlightSearchText'>${match}</span>`
+            )
 
-            listItem += `<li>${results}</li>`;
+            listItem += `<li>${results}</li>`
           } else {
-            listItem += `<li>${searchString}</li>`;
+            listItem += `<li>${searchString}</li>`
           }
         }
-      });
+      })
 
-      dataToReturn = `<ul>${listItem}</ul>`;
+      dataToReturn = `<ul>${listItem}</ul>`
     } else {
       if (searchString.match(searchTerm)) {
         results = searchString.replace(
           searchTerm,
-          (match) => `<span class="highlightSearchText">${match}</span>`
-        );
+          (match) => `<span class='highlightSearchText'>${match}</span>`
+        )
 
-        dataToReturn += results;
+        dataToReturn += results
       } else {
-        dataToReturn += searchString;
+        dataToReturn += searchString
       }
     }
   }
 
-  return dataToReturn || itemToHighlight;
-};
+  return dataToReturn || itemToHighlight
+}
 
-export default highlightSearch;
+export default highlightSearch

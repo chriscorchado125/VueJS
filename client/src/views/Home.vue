@@ -1,5 +1,5 @@
 <template>
-    <HomeComponent />
+  <HomeComponent />
 </template>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ import HomeComponent from "@/components/pages/Home.vue";
 
 @Component({
   components: {
-    HomeComponent
-  }
+    HomeComponent,
+  },
 })
 export default class Home extends Vue {}
 </script>

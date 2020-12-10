@@ -1,19 +1,19 @@
-import axios from "axios";
+import axios from 'axios'
 
-const url = "https://chriscorchado.com/drupal8/contact/feedback";
+const url = 'https://chriscorchado.com/drupal8/contact/feedback'
 
 class ContactService {
-  static getContact() {
+  static getContact () {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url);
-        const data = res.data;
-        resolve({ data });
+        const res = await axios.get(url)
+        const data = res.data
+        resolve({ data })
       } catch (err) {
-        reject(err);
+        reject(err)
       }
-    });
+    })
   }
 }
 
-export default ContactService;
+export default ContactService

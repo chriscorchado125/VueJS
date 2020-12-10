@@ -8,12 +8,13 @@
 
       nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow
         div#navbarCollapse.navbar-collapse
+
           div#navbar-nav.navbar-nav.show(role="navigation" aria-label="Main")
 
             router-link#logo.navbar-brand(to="/")
               img(src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" title="Home" :class="homeSelected" alt="Chris Corchado Logo")
 
-            router-link(to="/history" class="nav-item nav-link" id="companies-link") History
+            router-link(to="/history" class="nav-item nav-link" id="companies-link") Work
 
             router-link(to="/courses" class="nav-item nav-link" id="courses-link") Courses
 
@@ -21,11 +22,11 @@
 
             router-link(to="/contact" class="nav-item nav-link" id="contact-link") Contact
 
+          <search-component v-if='pageIsSearchable' />
+
           <profile-component v-if='this.$route.name == "Index" || this.$route.name == "Contact"' />
 
           <resume-component v-if='this.$route.name == "Resume"' />
-
-          <search-component v-if='pageIsSearchable' />
 
 </template>
 
@@ -42,30 +43,41 @@ import ResumeComponent from "@/components/ResumeOptions.vue";
   components: {
     SearchComponent,
     ProfileComponent,
-    ResumeComponent
-  }
+    ResumeComponent,
+  },
 })
 export default class SiteHeader extends Vue {
   homeSelected = "";
 
-  created() {
+  created(): void {
     this.setHomeLogo();
     this.setMetaTags();
   }
 
-  updated() {
-    const skipLink: any = document.getElementById("skip-links");
-    skipLink.focus();
+  updated(): void {
+    if (document.getElementById("skip-links")) {
+      const skipLink = document.getElementById("skip-links");
+      if (skipLink) {
+        skipLink.focus();
+      }
+    }
   }
 
-  get pageIsSearchable() {
-    if (this.$route.name == "Index" || this.$route.name == "Contact"  || this.$route.name == "Resume") return false;
-    return true;
+  get pageIsSearchable(): boolean {
+    if (
+      this.$route.name == "Index" ||
+      this.$route.name == "Contact" ||
+      this.$route.name == "Resume"
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   // home link uses a dashed border style around the logo
   // the other link styles are set in the router using linkActiveClass: "nav-item-active"
-  setHomeLogo() {
+  setHomeLogo(): void {
     if (this.$route.name == "Index") {
       this.homeSelected = "homeSelected";
     } else {
@@ -73,32 +85,60 @@ export default class SiteHeader extends Vue {
     }
   }
 
-  setMetaTags() {
-    const htmlEL: any = document.querySelector("html");
-    htmlEL.setAttribute("lang", "en");
+  setMetaTags(): void {
+    const htmlEL = document.querySelector("html");
+    if (htmlEL) {
+      htmlEL.setAttribute("lang", "en");
+    }
 
-    const link: any = document.createElement("link");
+    const link = document.createElement("link");
     link.href = "https://chriscorchado.com/images/chrisCorchado.ico";
     link.rel = "shortcut icon";
     link.type = "image/x-icon";
     document.getElementsByTagName("head")[0].appendChild(link);
 
-    const desc: any = document.createElement("meta");
+    let pageTitle = "";
+    switch (this.$route.name) {
+      case "Index":
+        pageTitle = "About Me";
+        break;
+      case "History":
+        pageTitle = "Work History";
+        break;
+      case "Courses":
+        pageTitle = "Courses and Awards";
+        break;
+      case "Projects":
+        pageTitle = "Project Samples";
+        break;
+      case "Contact":
+        pageTitle = "Contact Me";
+        break;
+      case "Resume":
+        pageTitle = "Resume";
+        break;
+    }
+
+    const desc = document.createElement("meta");
     desc.setAttribute("name", "description");
-    desc.setAttribute("content", "Chris Corchado - Portfolio and Resume");
+    desc.setAttribute(
+      "content",
+      "Chris Corchado | Portfolio and Resume | " + pageTitle
+    );
     document.getElementsByTagName("head")[0].appendChild(desc);
 
-    const keyword: any = document.createElement("meta");
+    const keyword = document.createElement("meta");
     desc.setAttribute("name", "keywords");
     desc.setAttribute(
       "content",
-      "Chris Corchado, Christian Corchado, Web Engineeer, Full Stack Web Developer, Web Application Developer, Graphic Designer, Online Portfolio, Resume, Engineer, Programmer, Developer"
+      "Chris Corchado, Full Stack, Front End, Back End, Website, Web Application, UI, UX, User Interface, User Experience, Architect, Engineer, Programmer, Developer, Designer, Portfolio, Resume"
     );
     document.getElementsByTagName("head")[0].appendChild(keyword);
   }
 
   @Watch("$route")
-  onPropertyChanged(value: any, oldValue: any) {
+  onPropertyChanged(value: unknown): void {
+    // @ts-ignore
     if (!value.query.page) {
       this.$store.commit("setPageNum", 1);
     }

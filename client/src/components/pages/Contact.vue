@@ -4,7 +4,7 @@
 
     div#contact.container.contact-form
 
-      h1(id='content')  Contact
+      h1(id='content')  Contact Me
 
       if error
         p #{ error }
@@ -21,15 +21,16 @@ import ContactService from "./../../services/ContactService";
 
 @Component
 export default class Contact extends Vue {
-  data: any = [];
+  data = [];
   dataLoaded = false;
   error = "";
   formHTML = "";
 
-  async created() {
+  async created(): Promise<void> {
     try {
       this.data = await ContactService.getContact();
       this.$store.commit("setRecords", this.data);
+      // @ts-ignore
       this.formHTML = this.getForm(this.data.data);
       this.dataLoaded = true;
     } catch (err) {
@@ -37,18 +38,28 @@ export default class Contact extends Vue {
     }
   }
 
-  mounted() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Contact Me";
+  mounted(): void {
+    const titleEl = document.querySelector("head title");
+    if (titleEl) {
+      titleEl.textContent = "Contact Me | Chris Corchado";
+    }
   }
 
-  updated() {
-    const emailField: any = document.getElementById("edit-mail");
-    emailField.focus();
+  updated(): void {
+    const emailField = document.getElementById("edit-mail");
+    if (emailField) {
+      emailField.focus();
+    }
   }
 
-  getForm(data) {
-    let form = data.substr(data.indexOf("<form class="), data.indexOf("</form>"));
+  getForm(data: unknown): string {
+    // @ts-ignore
+    let form = data.substr(
+      // @ts-ignore
+      data.indexOf("<form class="),
+      // @ts-ignore
+      data.indexOf("</form>")
+    );
     form = form.substr(0, form.indexOf("</form>") + 8);
     form = form.replace("Your email address", "Email");
 
@@ -56,7 +67,13 @@ export default class Contact extends Vue {
     const scriptString =
       '<script type="application/json" data-drupal-selector="drupal-settings-json">';
 
-    let script = data.substr(data.indexOf(scriptString), data.indexOf("><\/script>"));
+    // @ts-ignore
+    let script = data.substr(
+      // @ts-ignore
+      data.indexOf(scriptString),
+      // @ts-ignore
+      data.indexOf("><\/script>")
+    );
     script = script.substr(0, script.indexOf("<\/script>") + 9);
 
     return `${form} ${script}`;

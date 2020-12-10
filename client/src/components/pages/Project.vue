@@ -4,7 +4,7 @@
 
     div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{ query }}'
 
-    h1(v-else id='content') Projects
+    h1(v-else id='content') Project Samples
 
     if error
       p #{ error }
@@ -15,9 +15,7 @@
 
         div.project-title(v-html="highlightSearch(item.project.name, query)")
 
-        div.project-company(v-html="highlightSearch(item.project.company_name, query)")
-
-          span.project-date  ({{ getMonthYear(item.project.project_date, 'yearOnly') }})
+        div.project-company(v-html="highlightSearch(item.project.company_name, query) + ' (' + getMonthYear(item.project.project_date, 'yearOnly') + ')'")
 
         div.body-container(v-html="highlightSearch(item.project.description, query)")
 
@@ -51,15 +49,16 @@ import ProjectService from "./../../services/ProjectService";
 import getMonthYear from "./../../ts/getMonthYear";
 import getLightboxCode from "./../../ts/getLightboxCode";
 import highlightSearch from "./../../ts/highlightSearch";
+import noRecordsFound from "./../../ts/noRecords";
 
 @Component
 export default class Project extends Vue {
-  data: Array<object> = [];
+  data = [];
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
 
-  async created() {
+  async created(): Promise<void> {
     try {
       this.data = await ProjectService.getProject();
       this.$store.commit("setRecords", this.data);
@@ -70,25 +69,36 @@ export default class Project extends Vue {
     }
   }
 
-  mounted() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Project Samples";
+  mounted(): void {
+    const titleEl = document.querySelector("head title");
+    if (titleEl) {
+      titleEl.textContent = "Project Samples | Chris Corchado";
+    }
+  }
+
+  updated(): void{
+    if (this.data.length == 0) {
+      noRecordsFound('no-records', this.$store.state.search, 'navigation', 'No matches found for')
+    } else {
+      noRecordsFound('no-records', '', 'navigation', 'No matches found for')
+    }
   }
 
   // needed for the highlight search to work
-  beforeUpdate() {
+  beforeUpdate(): void {
     this.query = this.$route.query.q;
   }
 
-  setScreenshots(item) {
+  setScreenshots(item: string): Record<string, unknown> {
+    // @ts-ignore
     return item.split(",");
   }
 
-  setScreenshotClass(itemCount) {
+  setScreenshotClass(itemCount: string): string {
     return "project-item-grid project-items" + itemCount;
   }
 
-  encodeVideoName(urlParam, fileName) {
+  encodeVideoName(urlParam: string, fileName: string): string {
     return `https://chriscorchado.com/video.html?url=${urlParam}&name=${encodeURIComponent(
       fileName
     )}`;
@@ -99,8 +109,9 @@ export default class Project extends Vue {
   highlightSearch = highlightSearch;
 
   @Watch("$route")
-  async onPropertyChanged(value: any, oldValue: any) {
+  async onPropertyChanged(value: Record<string, []>): Promise<void> {
     this.data = await ProjectService.getProject(
+      // @ts-ignore
       value.query.page,
       this.$route.query.dir,
       this.$store.state.search

@@ -1,6 +1,7 @@
 @import "./../variables.scss";
 
 #logo img {
+  padding: 5px;
   height: 60px;
 }
 
@@ -16,21 +17,23 @@
 .navbar {
   border-bottom: 2px solid $main_color;
   display: block;
-  min-height: 80px;
+  min-height: 85px;
+  padding: 3px 0 0 0;
 
   /* force nav to stay horizontal */
   .navbar-nav {
     flex-direction: row;
 
-    /* align items vertically*/
+    /* align items vertically */
     .nav-item {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
-      padding: 0px 5px;
+      margin: 0; /* no unit */
+      padding: 0 5px;
       width: 80px;
     }
+
     .nav-item-active,
     .nav-item:hover {
       font-weight: bold;
@@ -47,6 +50,7 @@
   .navbar-nav {
     justify-content: space-between;
     width: 90%;
+
     .nav-item {
       justify-content: left;
       width: 60px;
@@ -65,15 +69,18 @@
   #logo img {
     margin: 0 0 0 10px;
   }
+
   .navbar {
+    padding: 0; /* no unit */
+
     .navbar-nav {
       width: 100%;
       margin-left: -7px !important;
+
       .nav-item {
         margin-left: -2px;
         font-size: 14px;
       }
     }
-    padding: 0;
   }
 }

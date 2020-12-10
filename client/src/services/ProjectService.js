@@ -1,31 +1,31 @@
-import axios from "axios";
-import getCookie from "./../ts/getCookie";
+import axios from 'axios'
+import getCookie from './../ts/getCookie'
 
 class ProjectService {
-  static getProject(page, dir, search) {
-    let url = "api/project";
+  static getProject (page, dir, search) {
+    let url = 'api/project'
 
     if (page) {
-      url += "?page=" + page + "&dir=" + dir;
+      url += '?page=' + page + '&dir=' + dir
     } else {
-      url += "?page=1";
+      url += '?page=1'
     }
 
-    url += "&first=" + getCookie("firstIDcookie").substring(3, 27);
-    url += "&last=" + getCookie("lastIDcookie").substring(3, 27);
+    url += '&first=' + getCookie('firstIDcookie').substring(3, 27)
+    url += '&last=' + getCookie('lastIDcookie').substring(3, 27)
 
-    if (search) url += "&q=" + search;
+    if (search) url += '&q=' + search
 
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url);
-        const data = res.data;
-        resolve(data.map((project) => ({ project })));
+        const res = await axios.get(url)
+        const data = res.data
+        resolve(data.map((project) => ({ project })))
       } catch (err) {
-        reject(err);
+        reject(err)
       }
-    });
+    })
   }
 }
 
-export default ProjectService;
+export default ProjectService

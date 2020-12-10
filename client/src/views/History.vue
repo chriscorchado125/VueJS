@@ -1,5 +1,5 @@
 <template>
-    <HistoryComponent />
+  <HistoryComponent />
 </template>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ import HistoryComponent from "@/components/pages/History.vue";
 
 @Component({
   components: {
-    HistoryComponent
-  }
+    HistoryComponent,
+  },
 })
 export default class History extends Vue {}
 </script>

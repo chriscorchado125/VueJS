@@ -1,10 +1,8 @@
 <template lang="pug">
 
-  main.container(role="main" v-if="dataLoaded")
+  main.container(role="main" v-if="dataLoaded && hasRecords")
 
-    div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
-
-    h1(v-else id='content') History
+    h1(id='content') Work History
 
     if error
       p #{ error }
@@ -25,7 +23,7 @@
 
           div.employment-dates(v-if="item.history.end_date") {{ getMonthYear(item.history.start_date) }} -  {{ getMonthYear(item.history.end_date) }}
 
-          div.employment-dates(v-else="item.history.end_date") {{ getMonthYear(item.history.start_date) }} -  null
+          div.employment-dates(v-else="item.history.end_date") {{ getMonthYear(item.history.start_date) }}
 
 </template>
 
@@ -38,15 +36,17 @@ import HistoryService from "./../../services/HistoryService";
 
 import getMonthYear from "./../../ts/getMonthYear";
 import highlightSearch from "./../../ts/highlightSearch";
+import noRecordsFound from "./../../ts/noRecords";
 
 @Component
 export default class History extends Vue {
-  data: Array<object> = [];
+  data = [];
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
+  hasRecords = true;
 
-  async created() {
+  async created(): Promise<void> {
     try {
       this.data = await HistoryService.getHistory();
       this.$store.commit("setRecords", this.data);
@@ -56,13 +56,23 @@ export default class History extends Vue {
     }
   }
 
-  mounted() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Work History";
+  mounted(): void {
+    const titleEl = document.querySelector("head title");
+    if (titleEl) {
+      titleEl.textContent = "Work History | Chris Corchado";
+    }
+  }
+
+  updated(): void{
+    if (this.data.length == 0) {
+      noRecordsFound('no-records', this.$store.state.search, 'navigation', 'No matches found for')
+    } else {
+      noRecordsFound('no-records', '', 'navigation', 'No matches found for')
+    }
   }
 
   // needed for the highlight search to work
-  beforeUpdate() {
+  beforeUpdate(): void {
     this.query = this.$route.query.q;
   }
 
@@ -71,17 +81,20 @@ export default class History extends Vue {
   highlightSearch = highlightSearch;
 
   @Watch("$route")
-  async onPropertyChanged(value: any, oldValue: any) {
+  async onPropertyChanged(value: unknown): Promise<void> {
     this.data = await HistoryService.getHistory(
+      // @ts-ignore
       value.query.page,
       this.$route.query.dir,
       this.$store.state.search
     );
+
     this.$store.commit("setRecords", this.data);
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "./../../scss/pages/company.scss";
+@import "./../../scss/header/search.scss";
 </style>

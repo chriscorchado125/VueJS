@@ -22,6 +22,6 @@ import Component from "vue-class-component";
 export default class Profile extends Vue {}
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "./../scss/header/profile.scss";
 </style>

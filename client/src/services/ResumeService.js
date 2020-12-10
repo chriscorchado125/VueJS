@@ -1,19 +1,19 @@
-import axios from "axios";
+import axios from 'axios'
 
-const url = "api/resume";
+const url = 'api/resume'
 
 class ResumeService {
-  static getResume() {
+  static getResume () {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url);
-        const data = res.data;
-        resolve(data.map((home) => ({ home })));
+        const res = await axios.get(url)
+        const data = res.data
+        resolve(data.map((home) => ({ home })))
       } catch (err) {
-        reject(err);
+        reject(err)
       }
-    });
+    })
   }
 }
 
-export default ResumeService;
+export default ResumeService

@@ -4,7 +4,7 @@
 
     div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
 
-    h1(v-else id='content') Courses
+    h1(v-else id='content') Courses and Awards
 
     if error
       p #{ error }
@@ -44,15 +44,16 @@ import CourseService from "./../../services/CourseService";
 import getMonthYear from "./../../ts/getMonthYear";
 import getLightboxCode from "./../../ts/getLightboxCode";
 import highlightSearch from "./../../ts/highlightSearch";
+import noRecordsFound from "./../../ts/noRecords";
 
 @Component
 export default class Course extends Vue {
-  data: Array<object> = [];
+  data = [];
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
 
-  async created() {
+  async created(): Promise<void> {
     try {
       this.data = await CourseService.getCourse();
       this.$store.commit("setRecords", this.data);
@@ -63,14 +64,24 @@ export default class Course extends Vue {
     }
   }
 
-  mounted() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - Courses Taken";
+  mounted(): void {
+    const titleEl = document.querySelector("head title");
+    if (titleEl) {
+      titleEl.textContent = "Courses and Awards | Chris Corchado";
+    }
   }
 
   // needed for the highlight search to work
-  beforeUpdate() {
+  beforeUpdate(): void {
     this.query = this.$route.query.q;
+  }
+
+  updated(): void{
+    if (this.data.length == 0) {
+      noRecordsFound('no-records', this.$store.state.search, 'navigation', 'No matches found for')
+    } else {
+      noRecordsFound('no-records', '', 'navigation', 'No matches found for')
+    }
   }
 
   getMonthYear = getMonthYear;
@@ -78,8 +89,9 @@ export default class Course extends Vue {
   highlightSearch = highlightSearch;
 
   @Watch("$route")
-  async onPropertyChanged(value: any, oldValue: any) {
+  async onPropertyChanged(value: unknown): Promise<void> {
     this.data = await CourseService.getCourse(
+      // @ts-ignore
       value.query.page,
       this.$route.query.dir,
       this.$store.state.search

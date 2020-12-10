@@ -1,18 +1,29 @@
 @import "./../variables.scss";
 
-#contact.container {
-  padding-bottom: 0;
-
+.contact-form{
   h1 {
-    margin: 80px 0 20px 0;
+    margin: 80px 0 30px 0 !important;
   }
 }
 
+// Submit button
+#edit-submit {
+  padding: 2px;
+  font-size: 12px;
+  margin-left: 0; // no unit
+}
+
+#edit-submit:hover {
+  color: #fff;
+  box-shadow: 0 0 #fff;
+  background-color: $main_color;
+}
+
 #contact-message-feedback-form {
-  margin: 30px auto;
   background-color: $main_color_light;
-  padding: 15px;
-  margin: 20px auto 0px auto;
+  padding: 10px 10px 35px 10px;
+  text-align: center !important;
+  margin: 20px auto 0 auto;
   max-width: 600px;
   border-radius: 10px;
 
@@ -24,12 +35,12 @@
     margin-top: 50px;
   }
 
-  /* holds the current page url */
+  // Holds the current page url
   #edit-field-site-wrapper {
     display: none;
   }
 
-  /* subject align */
+  // Subject align
   .form-text {
     display: inline !important;
   }
@@ -37,12 +48,13 @@
   #edit-name {
     max-width: 220px;
   }
+
   #edit-mail {
     max-width: 220px;
     margin-bottom: 50px;
   }
 
-  /* display the name and email fiels next to each other */
+  // Display the name and email fiels next to each other
   .js-form-item-name,
   .js-form-item-mail {
     display: inline-block !important;
@@ -57,7 +69,7 @@
   }
 
   #edit-actions {
-    margin: 30px auto 10px auto;
+    margin-top: 30px;
   }
 
   textarea {
@@ -70,22 +82,22 @@
   max-width: 250px;
 }
 
-/* stack name and email fields */
+// Stack name and email fields
 @media (max-width: 800px) {
-  #contact h1 {
-    margin-top: 70px !important;
-  }
-
   .container {
-    padding-bottom: 5px;
+    margin-top: 50px;
+    padding: 10px 10px 20px 10px;
+
     #contact-message-feedback-form {
       width: 100%;
       border-radius: 0;
     }
   }
+
   .js-form-item-name {
     display: block !important;
   }
+
   .js-form-item-mail {
     display: block !important;
   }
@@ -94,32 +106,21 @@
 @media (max-width: 700px) {
   .container {
     h1 {
-      padding-top: 50px !important;
-    }
-  }
-
-  #contact.container {
-    padding-bottom: 0px !important;
-    h1 {
-      margin-top: 100px;
+      margin: 90px 0 35px 0;
     }
   }
 }
 
 @media (max-width: 500px) {
-  #contact > h1 {
-    padding: 55px 0 0 0 !important;
-  }
-
-  #contact-message-feedback-form {
-    margin: 0;
-  }
-
-  #contact {
-    margin-top: 0px;
-  }
-
   #edit-message-0-value {
     height: 150px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    h1 {
+      margin: 60px 0 35px 0;
+    }
   }
 }

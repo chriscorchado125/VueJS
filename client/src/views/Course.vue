@@ -1,5 +1,5 @@
 <template>
-    <CourseComponent />
+  <CourseComponent />
 </template>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ import CourseComponent from "@/components/pages/Course.vue";
 
 @Component({
   components: {
-    CourseComponent
-  }
+    CourseComponent,
+  },
 })
 export default class Course extends Vue {}
 </script>

@@ -7,3 +7,11 @@ $item_text: rgba(0, 0, 0, 0.7);
 $item_bg_main: rgb(231, 228, 228);
 $item_bg_color: rgb(248, 244, 244);
 $item_bg_border: rgb(209, 208, 208);
+
+.highlightSearchText {
+  background-color: yellow !important;
+}
+
+.homeSelected {
+  border: 1px dashed $main_color;
+}

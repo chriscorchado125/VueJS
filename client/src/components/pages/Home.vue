@@ -19,34 +19,32 @@ import HomeService from "./../../services/HomeService";
 
 @Component
 export default class Home extends Vue {
-  data: Array<any> = [];
+  data: Array<unknown> = [];
   dataLoaded = false;
   error = "";
   homeDescription = "";
 
-  async created() {
+  async created(): Promise<void> {
     try {
       this.data = await HomeService.getHome();
       this.$store.commit("setRecords", this.data);
+      // @ts-ignore
       this.homeDescription = this.data[0].home.description;
       this.dataLoaded = true;
-
-      setTimeout(function() {
-        const vuejsText = document.getElementById("vuejs-text")!;
-        vuejsText.style.display = "inline-block";
-      }, 10);
     } catch (err) {
       this.error = err.message;
     }
   }
 
-  mounted() {
-    const titleEl: any = document.querySelector("head title");
-    titleEl.textContent = "Chris Corchado - About Me";
+  mounted(): void {
+    const titleEl = document.querySelector("head title");
+    if (titleEl) {
+      titleEl.textContent = "About Me | Chris Corchado";
+    }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "./../../scss/pages/home.scss";
 </style>

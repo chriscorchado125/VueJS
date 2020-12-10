@@ -1,55 +1,55 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import VueMeta from "vue-meta";
+import Vue from 'vue'
+import VueRouter, { RouteConfig } from 'vue-router'
+import VueMeta from 'vue-meta'
 
-import Home from "../views/Home.vue";
-import History from "../views/History.vue";
-import Course from "../views/Course.vue";
-import Project from "../views/Project.vue";
-import Contact from "../views/Contact.vue";
-import Resume from "../views/Resume.vue";
+import Home from '../views/Home.vue'
+import History from '../views/History.vue'
+import Course from '../views/Course.vue'
+import Project from '../views/Project.vue'
+import Contact from '../views/Contact.vue'
+import Resume from '../views/Resume.vue'
 
-Vue.use(VueRouter);
-Vue.use(VueMeta);
+Vue.use(VueRouter)
+Vue.use(VueMeta)
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
-    name: "Index",
+    path: '/',
+    name: 'Index',
     component: Home
   },
   {
-    path: "/history",
-    name: "History",
+    path: '/history',
+    name: 'History',
     component: History
   },
   {
-    path: "/courses",
-    name: "Courses",
+    path: '/courses',
+    name: 'Courses',
     component: Course
   },
   {
-    path: "/projects",
-    name: "Projects",
+    path: '/projects',
+    name: 'Projects',
     component: Project
   },
   {
-    path: "/contact",
-    name: "Contact",
+    path: '/contact',
+    name: 'Contact',
     component: Contact
   },
   {
-    path: "/resume",
-    name: "Resume",
+    path: '/resume',
+    name: 'Resume',
     component: Resume
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  linkActiveClass: "nav-item-active"
-});
+  linkActiveClass: 'nav-item-active'
+})
 
-export default router;
+export default router

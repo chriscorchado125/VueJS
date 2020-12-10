@@ -2,20 +2,20 @@
 
   form#search-container(role="search" :class="containerStyle" method="get" accept-charset="UTF-8" onClick="return false")
 
-    span#searchCount(v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
+    span#search-count(aria-live="polite" v-if="this.$store.state.pageRecordUserText") {{ this.$store.state.pageRecordUserText }}
 
-    label(for="searchSite")
-      span.screen-reader Enter Search
-      input(type="search" id="searchSite" @keypress="searchFilter()" v-model="searchFor" class="ccBtn" title="Search" aria-label="Enter search term" aria-required="true" maxlength="128" placeholder="Search items")
+    label(for="search-site")
+      span.screen-reader "Enter Search Term"
+      input(@keypress="searchFilter()" v-model="searchFor" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
+          placeholder="Search items" maxlength="128" class="cc-btn search-btn")
 
-    label(for="searchSubmit")
-      span.screen-reader Search
-      button(type="submit" id="searchSubmit" class="searchBtn" @click="search()"  aria-label="Search" title="search" role="button") Search
+    label(for="search-submit")
+      span.screen-reader "Search"
+      button(@click="search()" type="submit" id="search-submit" aria-label="Search" class="search-btn" value="Search" role="button") Search
 
-
-    label(for="searchClear")
-      span.screen-reader Clear Search
-      button(type="reset" id="searchClear" class="searchBtn" @click="clearSearch()" aria-label="Clear Search" value="Clear" title="Clear search" role="button") Clear
+    label(for="search-clear-btn")
+      span.screen-reader "Clear Search"
+      button(@click="clearSearch()" type="reset" id="search-clear-btn" aria-label="Clear Search" class="search-btn" title="Clear search" value="Clear" role="button") Clear
 
     <site-pagination />
 
@@ -30,38 +30,38 @@ import SitePagination from "@/components/SitePagination.vue";
 
 @Component({
   components: {
-    SitePagination
-  }
+    SitePagination,
+  },
 })
 export default class Search extends Vue {
-  searchFor: any = "";
-  containerStyle = "paginationNo";
+  searchFor = "";
+  containerStyle = "pagination-no";
 
-  mounted() {
+  mounted(): void {
     this.setContainerStyle();
   }
 
-  updated() {
+  updated(): void {
     this.setContainerStyle();
   }
 
-  setContainerStyle() {
+  setContainerStyle(): void {
     if (
       this.$store.state.pageRecordCount == this.$store.state.maxRecords ||
       this.$store.state.pageNum > 1
     ) {
-      this.containerStyle = "paginationYes";
+      this.containerStyle = "pagination-yes";
     } else {
-      this.containerStyle = "paginationNo";
+      this.containerStyle = "pagination-no";
     }
   }
 
-  searchFilter() {
+  searchFilter(): void {
     this.searchFor = this.searchFor.replace(/[^A-Z ]/gi, "");
     this.$store.commit("setSearchedFor", this.searchFor);
   }
 
-  clearSearch() {
+  clearSearch(): void {
     this.searchFor = "";
     this.$store.commit("setSearchedFor", "");
     this.$store.commit("setPageNum", 1);
@@ -71,7 +71,7 @@ export default class Search extends Vue {
     });
   }
 
-  search() {
+  search(): void {
     this.searchFor = this.$store.state.search.replace(/[^A-Z ]/gi, "");
     this.$store.commit("setPageNum", 1);
 
@@ -84,7 +84,10 @@ export default class Search extends Vue {
 
   // search data
   @Watch("$route")
-  async onPropertyChanged(value: any, oldValue: any) {
+  async onPropertyChanged(
+    value: Record<string, unknown>,
+    oldValue: Record<string, unknown>
+  ): Promise<void> {
     // clear search when navigating between pages - name is the route
     if (value.name !== oldValue.name) {
       this.searchFor = "";
