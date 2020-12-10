@@ -11,7 +11,7 @@ const noRecordsFound = (
   appendToID: string,
   msg: string
 ): void => {
-  if (searchedFor == '') {
+  if (searchedFor === '') {
     const noRecordMsg = document.getElementById(noRecordID) as HTMLElement
     if (noRecordMsg) {
       noRecordMsg.remove()
