@@ -85,7 +85,7 @@
 // Stack name and email fields
 @media (max-width: 800px) {
   .container {
-    margin-top: 50px;
+    margin-top: 10px;
     padding: 10px 10px 20px 10px;
 
     #contact-message-feedback-form {
@@ -106,7 +106,7 @@
 @media (max-width: 700px) {
   .container {
     h1 {
-      margin: 90px 0 35px 0;
+      margin: 110px 0 35px 0 !important;
     }
   }
 }

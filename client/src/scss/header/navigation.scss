@@ -1,6 +1,7 @@
 @import "./../variables.scss";
 
 #logo img {
+  margin-top: 5px;
   padding: 5px;
   height: 60px;
 }
@@ -9,7 +10,7 @@
   border: 1px dashed $main_color;
 }
 
-#navbarCollapse {
+.navbar-collapse {
   max-width: 1100px;
   margin: auto;
 }
@@ -18,7 +19,7 @@
   border-bottom: 2px solid $main_color;
   display: block;
   min-height: 85px;
-  padding: 3px 0 0 0;
+  padding-bottom: 0;  /* no unit */
 
   /* force nav to stay horizontal */
   .navbar-nav {
