@@ -50,6 +50,7 @@ import getMonthYear from "./../../ts/getMonthYear";
 import getLightboxCode from "./../../ts/getLightboxCode";
 import highlightSearch from "./../../ts/highlightSearch";
 import noRecordsFound from "./../../ts/noRecords";
+import animateLogo from "./../../ts/animateLogo";
 
 @Component
 export default class Project extends Vue {
@@ -64,12 +65,15 @@ export default class Project extends Vue {
       this.$store.commit("setRecords", this.data);
       this.dataLoaded = true;
       getLightboxCode();
+      animateLogo('logo-image', '');
     } catch (err) {
       this.error = err.message;
     }
   }
 
   mounted(): void {
+    animateLogo('logo-image', 'spin');
+
     const titleEl = document.querySelector("head title");
     if (titleEl) {
       titleEl.textContent = "Project Samples | Chris Corchado";

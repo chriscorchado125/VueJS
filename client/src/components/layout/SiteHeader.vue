@@ -6,13 +6,13 @@
 
     header#navigation
 
-      nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow
-        div#navbarCollapse.navbar-collapse
-
-          div#navbar-nav.navbar-nav.show(role="navigation" aria-label="Main")
+      nav.navbar.navbar-light.bg-light.fixed-top.navbar-fixed-top.shadow(aria-label="navigation-outer-wrapper")
+        div#user-message
+        div#navbar-collapse.navbar-collapse(aria-label="navigation-collapse-wrapper")
+          div#navbar-nav.navbar-nav.show(role='navigation' aria-label='Navigation')
 
             router-link#logo.navbar-brand(to="/")
-              img(src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" title="Home" :class="homeSelected" alt="Chris Corchado Logo")
+              img(loading='lazy' src="https://chriscorchado.com/images/chriscorchado-initials-logo.png" id="logo-image" :class="homeSelected" alt="Home")
 
             router-link(to="/history" class="nav-item nav-link" id="companies-link") Work
 
@@ -38,6 +38,7 @@ import { Watch } from "vue-property-decorator";
 import SearchComponent from "@/components/Search.vue";
 import ProfileComponent from "@/components/Profile.vue";
 import ResumeComponent from "@/components/ResumeOptions.vue";
+import animateLogo from "./../../ts/animateLogo";
 
 @Component({
   components: {
@@ -46,6 +47,7 @@ import ResumeComponent from "@/components/ResumeOptions.vue";
     ResumeComponent,
   },
 })
+
 export default class SiteHeader extends Vue {
   homeSelected = "";
 
@@ -61,6 +63,10 @@ export default class SiteHeader extends Vue {
         skipLink.focus();
       }
     }
+  }
+
+  mounted(): void {
+    animateLogo('logo-image', 'spin');
   }
 
   get pageIsSearchable(): boolean {
@@ -142,9 +148,9 @@ export default class SiteHeader extends Vue {
     if (!value.query.page) {
       this.$store.commit("setPageNum", 1);
     }
-
     this.setHomeLogo();
   }
+
 }
 </script>
 

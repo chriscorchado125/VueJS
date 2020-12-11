@@ -18,6 +18,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 import ContactService from "./../../services/ContactService";
+import animateLogo from "./../../ts/animateLogo";
 
 @Component
 export default class Contact extends Vue {
@@ -33,12 +34,15 @@ export default class Contact extends Vue {
       // @ts-ignore
       this.formHTML = this.getForm(this.data.data);
       this.dataLoaded = true;
+      animateLogo('logo-image', '');
     } catch (err) {
       this.error = err.message;
     }
   }
 
   mounted(): void {
+    animateLogo('logo-image', 'spin');
+
     const titleEl = document.querySelector("head title");
     if (titleEl) {
       titleEl.textContent = "Contact Me | Chris Corchado";

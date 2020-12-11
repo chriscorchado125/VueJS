@@ -16,6 +16,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 import ResumeService from "./../../services/ResumeService";
+import animateLogo from "./../../ts/animateLogo";
 
 @Component
 export default class Resume extends Vue {
@@ -30,12 +31,15 @@ export default class Resume extends Vue {
       this.$store.commit("setRecords", this.data);
       this.resumeHTML = this.data[0].home.html;
       this.dataLoaded = true;
+      animateLogo('logo-image', '');
     } catch (err) {
       this.error = err.message;
     }
   }
 
   mounted(): void {
+    animateLogo('logo-image', 'spin');
+
     if (document.querySelector("head title")) {
       const titleEl = document.querySelector("head title");
       if (titleEl) {

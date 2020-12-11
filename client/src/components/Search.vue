@@ -98,6 +98,6 @@ export default class Search extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "./../scss/header/search.scss";
-@import "./../scss/header/pagination.scss";
+@import "./../../src/scss/header/search.scss";
+@import "./../../src/scss/header/pagination.scss";
 </style>

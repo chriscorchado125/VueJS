@@ -37,6 +37,7 @@ import HistoryService from "./../../services/HistoryService";
 import getMonthYear from "./../../ts/getMonthYear";
 import highlightSearch from "./../../ts/highlightSearch";
 import noRecordsFound from "./../../ts/noRecords";
+import animateLogo from "./../../ts/animateLogo";
 
 @Component
 export default class History extends Vue {
@@ -51,12 +52,15 @@ export default class History extends Vue {
       this.data = await HistoryService.getHistory();
       this.$store.commit("setRecords", this.data);
       this.dataLoaded = true;
+      animateLogo('logo-image', '');
     } catch (err) {
       this.error = err.message;
     }
   }
 
   mounted(): void {
+    animateLogo('logo-image', 'spin');
+
     const titleEl = document.querySelector("head title");
     if (titleEl) {
       titleEl.textContent = "Work History | Chris Corchado";

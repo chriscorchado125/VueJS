@@ -16,6 +16,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 import HomeService from "./../../services/HomeService";
+import animateLogo from "./../../ts/animateLogo";
 
 @Component
 export default class Home extends Vue {
@@ -31,12 +32,15 @@ export default class Home extends Vue {
       // @ts-ignore
       this.homeDescription = this.data[0].home.description;
       this.dataLoaded = true;
+      animateLogo('logo-image', '');
     } catch (err) {
       this.error = err.message;
     }
   }
 
   mounted(): void {
+    animateLogo('logo-image', 'spin');
+
     const titleEl = document.querySelector("head title");
     if (titleEl) {
       titleEl.textContent = "About Me | Chris Corchado";
