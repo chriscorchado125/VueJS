@@ -19,7 +19,7 @@
 
         section(:class="setScreenshotClass(item.project.screenshots.length)" data-featherlight-gallery="" data-featherlight-filter="a")
 
-          div.project-item.shadow(v-for="screenshot in item.project.screenshots" :key="screenshot._id" :title="setScreenshots(screenshot)[0]")
+          div.project-item.shadow(v-for="screenshot in item.project.screenshots" :key="screenshot._id" :title="item.project.name")
 
             a.gallery(:href="setScreenshots(screenshot)[1]")
 
