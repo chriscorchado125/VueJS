@@ -2,12 +2,10 @@
 
   main.container(role="main" v-if="dataLoaded")
 
-    div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{ query }}'
-
-    h1(v-else id='content') Project Samples
-
     if error
       p #{ error }
+
+    h1(id='content') Project Samples
 
     div.project-container
 

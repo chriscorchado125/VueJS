@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  main.container(role="main" v-if="dataLoaded && hasRecords")
+  main.container(role="main" v-if="dataLoaded")
 
     h1(id='content') Work History
 
@@ -45,7 +45,6 @@ export default class History extends Vue {
   dataLoaded = false;
   error = "";
   query = this.$store.state.search;
-  hasRecords = true;
 
   async created(): Promise<void> {
     try {
@@ -98,7 +97,7 @@ export default class History extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "./../../scss/pages/company.scss";
 @import "./../../scss/header/search.scss";
 </style>

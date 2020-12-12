@@ -1,10 +1,8 @@
 <template lang="pug">
 
-  main.container(role="main" v-if="dataLoaded")
+  main.container.course(role="main" v-if="dataLoaded")
 
-    div#noRecords(v-if="this.$store.state.pageRecordCount == 0 && this.$store.state.search")  No matches found for '{{this.$store.state.search}}'
-
-    h1(v-else id='content') Courses and Awards
+    h1(id='content') Courses and Awards
 
     if error
       p #{ error }
@@ -105,6 +103,7 @@ export default class Course extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "./../../scss/pages/course.scss";
+@import "./../../scss/header/search.scss";
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  main.container(role="main" v-if="dataLoaded")
+  main.container.resume(role="main" v-if="dataLoaded")
 
     h1(id='content') Resume
 
