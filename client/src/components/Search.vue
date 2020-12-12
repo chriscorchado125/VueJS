@@ -6,7 +6,7 @@
 
     label(for="search-site")
       span.screen-reader "Enter Search Term"
-      input(@keypress="searchFilter()" v-model="searchFor" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
+      input(@keypress="searchFilter()" v-model="searchFor" @focus="$event.target.select()" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
           placeholder="Search items" maxlength="128" class="cc-btn search-btn")
 
     label(for="search-submit")
