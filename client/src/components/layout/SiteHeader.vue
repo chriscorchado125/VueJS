@@ -134,12 +134,17 @@ export default class SiteHeader extends Vue {
     document.getElementsByTagName("head")[0].appendChild(desc);
 
     const keyword = document.createElement("meta");
-    desc.setAttribute("name", "keywords");
-    desc.setAttribute(
+    keyword.setAttribute("name", "keywords");
+    keyword.setAttribute(
       "content",
       "Chris Corchado, Full Stack, Front End, Back End, Website, Web Application, UI, UX, User Interface, User Experience, Architect, Engineer, Programmer, Developer, Designer, Portfolio, Resume"
     );
     document.getElementsByTagName("head")[0].appendChild(keyword);
+
+    const robots = document.createElement("meta");
+    robots.setAttribute("name", "robots");
+    robots.setAttribute("content", "index, follow");
+    document.getElementsByTagName("head")[0].appendChild(robots);
   }
 
   @Watch("$route")
