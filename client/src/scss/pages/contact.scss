@@ -1,79 +1,79 @@
 @import "./../variables.scss";
 
-.contact-form {
+#contact {
   h1 {
     margin: 80px 0 30px 0 !important;
   }
-}
 
-// Submit button
-#edit-submit {
-  padding: 2px;
-  font-size: 12px;
-  margin-left: 0; // no unit
-}
-
-#edit-submit:hover {
-  color: #fff;
-  box-shadow: 0 0 #fff;
-  background-color: $main_color;
-}
-
-#contact-message-feedback-form {
-  background-color: $main_color_light;
-  padding: 10px 10px 35px 10px;
-  text-align: center !important;
-  margin: 20px auto 0 auto;
-  max-width: 600px;
-  border-radius: 10px;
-
-  label {
-    display: block;
-  }
-
-  #thank-you {
-    margin-top: 50px;
-  }
-
-  // Holds the current page url
-  #edit-field-site-wrapper {
-    display: none;
-  }
-
-  // Subject align
-  .form-text {
-    display: inline !important;
-  }
-
-  #edit-name {
-    max-width: 220px;
-  }
-
-  #edit-mail {
-    max-width: 220px;
-    margin-bottom: 50px;
-  }
-
-  // Display the name and email fiels next to each other
-  .js-form-item-name,
-  .js-form-item-mail {
-    display: inline-block !important;
-  }
-
-  #edit-subject-0-value {
-    max-width: 90%;
-  }
-
-  #edit-message-0-value {
-    max-width: 95%;
-  }
-
-  #edit-actions {
-    margin-top: 30px;
-  }
-
-  textarea {
+  #contact-message-feedback-form {
+    background-color: $main_color_light;
+    padding: 10px 10px 35px 10px;
+    text-align: center !important;
+    margin: 20px auto 0 auto;
     max-width: 600px;
+    border-radius: 10px;
+
+    // Submit button
+    #edit-submit {
+      padding: 2px;
+      font-size: 12px;
+      margin-left: 0; // no unit
+    }
+
+    #edit-submit:hover {
+      color: #fff;
+      box-shadow: 0 0 #fff;
+      background-color: $main_color;
+    }
+
+    label {
+      display: block;
+    }
+
+    #thank-you {
+      margin-top: 50px;
+    }
+
+    // Holds the current page url
+    #edit-field-site-wrapper {
+      display: none;
+    }
+
+    // Subject align
+    .form-text {
+      display: inline !important;
+    }
+
+    #edit-name {
+      max-width: 220px;
+    }
+
+    #edit-mail {
+      max-width: 220px;
+      margin-bottom: 50px;
+    }
+
+    // Display the name and email fiels next to each other
+    .js-form-item-name,
+    .js-form-item-mail {
+      display: inline-block !important;
+    }
+
+    #edit-subject-0-value {
+      max-width: 90%;
+    }
+
+    #edit-message-0-value {
+      max-width: 95%;
+    }
+
+    #edit-actions {
+      margin-top: 30px;
+    }
+
+    textarea {
+      max-width: 600px;
+    }
   }
 }
 
@@ -91,36 +91,26 @@
     #contact-message-feedback-form {
       width: 100%;
       border-radius: 0;
-    }
-  }
 
-  .js-form-item-name {
-    display: block !important;
-  }
+      .js-form-item-name {
+        display: block !important;
+      }
 
-  .js-form-item-mail {
-    display: block !important;
-  }
-}
-
-@media (max-width: 700px) {
-  .container {
-    h1 {
-      margin: 110px 0 35px 0 !important;
+      .js-form-item-mail {
+        display: block !important;
+      }
     }
   }
 }
 
 @media (max-width: 500px) {
-  #edit-message-0-value {
-    height: 150px;
-  }
-}
-
-@media (max-width: 400px) {
-  .container {
+  #contact {
     h1 {
-      margin: 60px 0 35px 0;
+      margin: 60px 0 30px 0 !important;
+    }
+
+    #edit-message-0-value {
+      height: 150px;
     }
   }
 }

@@ -1,16 +1,10 @@
 @import "./../variables.scss";
 
-h1 {
-  margin-bottom: 30px;
-}
-
 .company {
   display: grid;
   grid-template-columns: 30% 30% 30%;
   align-items: stretch;
   justify-content: space-evenly;
-  padding-top: 0;
-  margin-top: -2px !important;
 }
 
 // Individual company container
@@ -98,12 +92,6 @@ h1 {
 }
 
 @media (max-width: 500px) {
-  .container {
-    h1 {
-      margin: 100px auto 20px auto !important;
-    }
-  }
-
   .company-screenshot {
     max-width: 250px;
   }

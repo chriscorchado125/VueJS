@@ -24,11 +24,6 @@ body {
   overflow: hidden;
 }
 
-// Hide search
-//#search-container {
-//display: none;
-//}
-
 #user-message {
   position: sticky;
   width: 320px;
@@ -122,7 +117,7 @@ button {
   .container {
     h1 {
       font-size: 24px;
-      margin-top: 100px;
+      margin-top: 120px !important;
     }
   }
 }
@@ -130,5 +125,14 @@ button {
 @media (max-width: 600px) {
   #footer {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    h1 {
+      font-size: 20px;
+      margin-top: 100px !important;
+    }
   }
 }

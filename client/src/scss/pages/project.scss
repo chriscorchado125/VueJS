@@ -1,9 +1,5 @@
 @import "./../variables.scss";
 
-h1 {
-  margin-bottom: 30px;
-}
-
 // Page container
 .project-container {
   display: grid;
@@ -11,7 +7,7 @@ h1 {
   align-items: stretch;
   justify-content: space-evenly;
   font-size: 12px;
-  margin-bottom: 70px;
+  margin: 20px auto 70px auto;
 
   // Individual project container
   .project {
