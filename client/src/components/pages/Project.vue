@@ -125,4 +125,5 @@ export default class Project extends Vue {
 
 <style scoped lang="scss">
 @import "./../../scss/pages/project.scss";
+@import "./../../scss/header/search.scss";
 </style>
