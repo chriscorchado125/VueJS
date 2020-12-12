@@ -8,19 +8,14 @@ const animateLogo = (logoID: string, animationID: string): void => {
 
   const checkExist = setInterval(function () {
     if (logoElement) {
-
       if (animationID) {
         logoElement.setAttribute('src', `https://chriscorchado.com/images/chriscorchado-initials-logo-animated-${animationID}.gif`)
       } else {
         logoElement.setAttribute('src', 'https://chriscorchado.com/images/chriscorchado-initials-logo.png')
       }
-
-      //logoElement.setAttribute('src', `https://chriscorchado.com/images/chriscorchado-initials-logo-animated-${animationID}.gif`)
       clearInterval(checkExist)
-
     }
   }, 100)
-
 }
-console.log("animateLogo")
+
 export default animateLogo
