@@ -1,7 +1,7 @@
 import axios from 'axios'
-
 const url = 'api/home'
 
+/* eslint no-async-promise-executor: "off" */
 class HomeService {
   static getHome () {
     return new Promise(async (resolve, reject) => {

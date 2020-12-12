@@ -1,7 +1,7 @@
 import axios from 'axios'
-
 const url = 'https://chriscorchado.com/drupal8/contact/feedback'
 
+/* eslint no-async-promise-executor: "off" */
 class ContactService {
   static getContact () {
     return new Promise(async (resolve, reject) => {

@@ -1,7 +1,7 @@
 import axios from 'axios'
-
 const url = 'api/resume'
 
+/* eslint no-async-promise-executor: "off" */
 class ResumeService {
   static getResume () {
     return new Promise(async (resolve, reject) => {

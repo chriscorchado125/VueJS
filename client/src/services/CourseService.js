@@ -1,6 +1,7 @@
 import axios from 'axios'
 import getCookie from './../ts/getCookie'
 
+/* eslint no-async-promise-executor: "off" */
 class CourseService {
   static getCourse (page, dir, search) {
     let url = 'api/course'
