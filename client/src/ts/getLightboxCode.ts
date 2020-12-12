@@ -4,9 +4,9 @@
 const getLightbox = () => {
   const scripts = [
     'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
-    '//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js',
-    '//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js',
-    '//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js'
+    'https://cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js',
+    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js',
+    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js'
   ]
 
   scripts.forEach((script) => {
@@ -16,8 +16,8 @@ const getLightbox = () => {
   })
 
   const css = [
-    '//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css',
-    '//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css'
+    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css',
+    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css'
   ]
 
   css.forEach((style) => {
