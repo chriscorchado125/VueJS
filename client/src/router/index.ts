@@ -1,4 +1,5 @@
 import Vue from 'vue'
+/* eslint no-unused-vars: "off" */
 import VueRouter, { RouteConfig } from 'vue-router'
 import VueMeta from 'vue-meta'
 
