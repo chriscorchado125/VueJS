@@ -54,6 +54,7 @@ export default class SiteHeader extends Vue {
   created(): void {
     this.setHomeLogo();
     this.setMetaTags();
+    animateLogo('logo-image', 'spin');
   }
 
   updated(): void {
@@ -66,7 +67,7 @@ export default class SiteHeader extends Vue {
   }
 
   mounted(): void {
-    animateLogo('logo-image', 'spin');
+    animateLogo('logo-image', '');
   }
 
   get pageIsSearchable(): boolean {
@@ -96,6 +97,11 @@ export default class SiteHeader extends Vue {
     if (htmlEL) {
       htmlEL.setAttribute("lang", "en");
     }
+
+    // Need for the Featherlight lightbox JS and CSS
+    const scriptTag:any = document.createElement('script')
+    scriptTag.setAttribute('src', 'https://chriscorchado.com/lightbox/js/jquery-3.5.1.min.js')
+    document.head.appendChild(scriptTag)
 
     const link = document.createElement("link");
     link.href = "https://chriscorchado.com/images/chrisCorchado.ico";

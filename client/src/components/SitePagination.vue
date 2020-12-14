@@ -18,6 +18,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 
+import animateLogo from "./../ts/animateLogo"
 import getCookie from "./../ts/getCookie";
 
 @Component
@@ -36,6 +37,8 @@ export default class SitePagination extends Vue {
     this.direction = dir;
     this.activateNav = false;
 
+    animateLogo('logo-image', 'spin')
+
     if (this.currentPageNum !== this.$store.state.pageNum) {
       this.currentPageNum = this.$store.state.pageNum;
     }
@@ -49,6 +52,8 @@ export default class SitePagination extends Vue {
     //this.$store.commit("setNextRecord", getCookie("nextLink"));
     //this.nextLink = this.$store.state.setNextRecord;
     this.recordCount = this.$store.state.pageRecordCount;
+
+    animateLogo('logo-image', '')
   }
 
   // TODO: fix next link.  If the record count is the max then there will be a next link which is not right

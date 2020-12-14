@@ -1,27 +1,26 @@
 /**
- * Inject the styles and scripts needed for the lighbox/galllery
+ * Inject the styles and scripts needed for the lightbox/galllery
  */
 const getLightbox = () => {
   const scripts = [
-    'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js',
-    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js',
-    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js'
+    'https://chriscorchado.com/lightbox/js/jquery.detect_swipe.min.js',
+    'https://chriscorchado.com/lightbox/js/featherlight.min.js',
+    'https://chriscorchado.com/lightbox/js/featherlight.gallery.min.js'
   ]
 
   scripts.forEach((script) => {
-    const scriptTag = document.createElement('script')
+    const scriptTag:any = document.createElement('script')
     scriptTag.setAttribute('src', script)
     document.head.appendChild(scriptTag)
   })
 
   const css = [
-    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css',
-    'https://cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css'
+    'https://chriscorchado.com/lightbox/css/featherlight.min.css',
+    'https://chriscorchado.com/lightbox/css/featherlight.gallery.min.css'
   ]
 
   css.forEach((style) => {
-    const cssTag = document.createElement('link')
+    const cssTag:any = document.createElement('link')
     cssTag.setAttribute('href', style)
     cssTag.setAttribute('rel', 'stylesheet')
     document.head.appendChild(cssTag)

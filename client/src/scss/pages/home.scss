@@ -1,10 +1,5 @@
 @import './../variables.scss';
 
-// Homepage is not searchable
-#search-container {
-  display: none;
-}
-
 .noLink {
   pointer-events: none;
 }
