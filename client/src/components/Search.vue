@@ -6,8 +6,8 @@
 
     label(for="search-site")
       span.screen-reader "Enter Search Term"
-      input(@keypress="searchFilter()" v-model="searchFor" @focus="$event.target.select()" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
-          placeholder="Search items" maxlength="128" class="cc-btn search-btn")
+      input(@keyup="searchFilter()" v-model="searchFor" @focus="$event.target.select()" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
+          placeholder="Search items" maxlength="128")
 
     label(for="search-submit")
       span.screen-reader "Search"
@@ -57,7 +57,7 @@ export default class Search extends Vue {
   }
 
   searchFilter(): void {
-    this.searchFor = this.searchFor.replace(/[^A-Z ]/gi, "");
+    this.searchFor = this.searchFor.replace(/[^A-Z]/gi, "");
     this.$store.commit("setSearchedFor", this.searchFor);
   }
 
@@ -72,7 +72,7 @@ export default class Search extends Vue {
   }
 
   search(): void {
-    this.searchFor = this.$store.state.search.replace(/[^A-Z ]/gi, "");
+    this.searchFor = this.$store.state.search;
     this.$store.commit("setPageNum", 1);
 
     this.$router
