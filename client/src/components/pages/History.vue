@@ -28,28 +28,28 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Watch } from 'vue-property-decorator';
 
-import HistoryService from "./../../services/HistoryService";
+import HistoryService from './../../services/HistoryService';
 
-import getMonthYear from "./../../ts/getMonthYear";
-import highlightSearch from "./../../ts/highlightSearch";
-import noRecordsFound from "./../../ts/noRecords";
-import animateLogo from "./../../ts/animateLogo";
+import getMonthYear from './../../ts/getMonthYear';
+import highlightSearch from './../../ts/highlightSearch';
+import noRecordsFound from './../../ts/noRecords';
+import animateLogo from './../../ts/animateLogo';
 
 @Component
 export default class History extends Vue {
   data = [];
   dataLoaded = false;
-  error = "";
+  error = '';
   query = this.$store.state.search;
 
   async created(): Promise<void> {
     try {
       this.data = await HistoryService.getHistory();
-      this.$store.commit("setRecords", this.data);
+      this.$store.commit('setRecords', this.data);
       this.dataLoaded = true;
       animateLogo('logo-image', '');
     } catch (err) {
@@ -59,18 +59,36 @@ export default class History extends Vue {
 
   mounted(): void {
     animateLogo('logo-image', 'spin');
-
-    const titleEl = document.querySelector("head title");
-    if (titleEl) {
-      titleEl.textContent = "Work History | Chris Corchado";
-    }
+    this.updateMeta();
   }
 
-  updated(): void{
+  updateMeta(): void {
+    const titleEl = document.querySelector('head title');
+    if (titleEl) {
+      titleEl.textContent = 'Work History | Chris Corchado';
+    }
+
+    const descEl = document.querySelector("[name='description']");
+    if (descEl) {
+      descEl.remove();
+    }
+
+    const desc = document.createElement('meta');
+    desc.setAttribute('name', 'description');
+    desc.setAttribute('content', 'Work history along with descriptions and screenshots');
+    document.getElementsByTagName('head')[0].appendChild(desc);
+  }
+
+  updated(): void {
     if (this.data.length == 0) {
-      noRecordsFound('no-records', this.$store.state.search, 'navigation', 'No matches found for')
+      noRecordsFound(
+        'no-records',
+        this.$store.state.search,
+        'navigation',
+        'No matches found for'
+      );
     } else {
-      noRecordsFound('no-records', '', 'navigation', 'No matches found for')
+      noRecordsFound('no-records', '', 'navigation', 'No matches found for');
     }
   }
 
@@ -83,7 +101,7 @@ export default class History extends Vue {
 
   highlightSearch = highlightSearch;
 
-  @Watch("$route")
+  @Watch('$route')
   async onPropertyChanged(value: unknown): Promise<void> {
     this.data = await HistoryService.getHistory(
       // @ts-ignore
@@ -92,12 +110,12 @@ export default class History extends Vue {
       this.$store.state.search
     );
 
-    this.$store.commit("setRecords", this.data);
+    this.$store.commit('setRecords', this.data);
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "./../../scss/pages/company.scss";
-@import "./../../scss/header/search.scss";
+@import './../../scss/pages/company.scss';
+@import './../../scss/header/search.scss';
 </style>

@@ -109,41 +109,11 @@ export default class SiteHeader extends Vue {
     link.type = "image/x-icon";
     document.getElementsByTagName("head")[0].appendChild(link);
 
-    let pageTitle = "";
-    switch (this.$route.name) {
-      case "Index":
-        pageTitle = "About Me";
-        break;
-      case "History":
-        pageTitle = "Work History";
-        break;
-      case "Courses":
-        pageTitle = "Courses and Awards";
-        break;
-      case "Projects":
-        pageTitle = "Project Samples";
-        break;
-      case "Contact":
-        pageTitle = "Contact Me";
-        break;
-      case "Resume":
-        pageTitle = "Resume";
-        break;
-    }
-
-    const desc = document.createElement("meta");
-    desc.setAttribute("name", "description");
-    desc.setAttribute(
-      "content",
-      "Chris Corchado | Portfolio and Resume | " + pageTitle
-    );
-    document.getElementsByTagName("head")[0].appendChild(desc);
-
     const keyword = document.createElement("meta");
     keyword.setAttribute("name", "keywords");
     keyword.setAttribute(
       "content",
-      "Chris Corchado, Full Stack, Front End, Back End, Website, Web Application, UI, UX, User Interface, User Experience, Architect, Engineer, Programmer, Developer, Designer, Portfolio, Resume"
+      "Chris Corchado, Christian Corchado, Full Stack, Front End, Back End, Website, Web Application, UI, UX, User Interface, User Experience, Architect, Engineer, Programmer, Developer, Designer, Portfolio, Resume"
     );
     document.getElementsByTagName("head")[0].appendChild(keyword);
 

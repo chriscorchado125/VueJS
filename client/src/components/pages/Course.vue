@@ -33,29 +33,29 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Watch } from 'vue-property-decorator';
 
-import CourseService from "./../../services/CourseService";
+import CourseService from './../../services/CourseService';
 
-import getMonthYear from "./../../ts/getMonthYear";
-import getLightboxCode from "./../../ts/getLightboxCode";
-import highlightSearch from "./../../ts/highlightSearch";
-import noRecordsFound from "./../../ts/noRecords";
-import animateLogo from "./../../ts/animateLogo";
+import getMonthYear from './../../ts/getMonthYear';
+import getLightboxCode from './../../ts/getLightboxCode';
+import highlightSearch from './../../ts/highlightSearch';
+import noRecordsFound from './../../ts/noRecords';
+import animateLogo from './../../ts/animateLogo';
 
 @Component
 export default class Course extends Vue {
   data = [];
   dataLoaded = false;
-  error = "";
+  error = '';
   query = this.$store.state.search;
 
   async created(): Promise<void> {
     try {
       this.data = await CourseService.getCourse();
-      this.$store.commit("setRecords", this.data);
+      this.$store.commit('setRecords', this.data);
       this.dataLoaded = true;
       getLightboxCode();
       animateLogo('logo-image', '');
@@ -66,11 +66,27 @@ export default class Course extends Vue {
 
   mounted(): void {
     animateLogo('logo-image', 'spin');
+    this.updateMeta();
+  }
 
-    const titleEl = document.querySelector("head title");
+  updateMeta(): void {
+    const titleEl = document.querySelector('head title');
     if (titleEl) {
-      titleEl.textContent = "Courses and Awards | Chris Corchado";
+      titleEl.textContent = 'Courses and Awards | Chris Corchado';
     }
+
+    const descEl = document.querySelector("[name='description']");
+    if (descEl) {
+      descEl.remove();
+    }
+
+    const desc = document.createElement('meta');
+    desc.setAttribute('name', 'description');
+    desc.setAttribute(
+      'content',
+      'Courses taken and awards received within the Information Technology field'
+    );
+    document.getElementsByTagName('head')[0].appendChild(desc);
   }
 
   // needed for the highlight search to work
@@ -78,11 +94,16 @@ export default class Course extends Vue {
     this.query = this.$route.query.q;
   }
 
-  updated(): void{
+  updated(): void {
     if (this.data.length == 0) {
-      noRecordsFound('no-records', this.$store.state.search, 'navigation', 'No matches found for')
+      noRecordsFound(
+        'no-records',
+        this.$store.state.search,
+        'navigation',
+        'No matches found for'
+      );
     } else {
-      noRecordsFound('no-records', '', 'navigation', 'No matches found for')
+      noRecordsFound('no-records', '', 'navigation', 'No matches found for');
     }
   }
 
@@ -90,7 +111,7 @@ export default class Course extends Vue {
 
   highlightSearch = highlightSearch;
 
-  @Watch("$route")
+  @Watch('$route')
   async onPropertyChanged(value: unknown): Promise<void> {
     this.data = await CourseService.getCourse(
       // @ts-ignore
@@ -98,12 +119,12 @@ export default class Course extends Vue {
       this.$route.query.dir,
       this.$store.state.search
     );
-    this.$store.commit("setRecords", this.data);
+    this.$store.commit('setRecords', this.data);
   }
 }
 </script>
 
 <style lang="scss">
-@import "./../../scss/pages/course.scss";
-@import "./../../scss/header/search.scss";
+@import './../../scss/pages/course.scss';
+@import './../../scss/header/search.scss';
 </style>

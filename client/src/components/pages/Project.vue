@@ -38,29 +38,29 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Watch } from 'vue-property-decorator';
 
-import ProjectService from "./../../services/ProjectService";
+import ProjectService from './../../services/ProjectService';
 
-import getMonthYear from "./../../ts/getMonthYear";
-import getLightboxCode from "./../../ts/getLightboxCode";
-import highlightSearch from "./../../ts/highlightSearch";
-import noRecordsFound from "./../../ts/noRecords";
-import animateLogo from "./../../ts/animateLogo";
+import getMonthYear from './../../ts/getMonthYear';
+import getLightboxCode from './../../ts/getLightboxCode';
+import highlightSearch from './../../ts/highlightSearch';
+import noRecordsFound from './../../ts/noRecords';
+import animateLogo from './../../ts/animateLogo';
 
 @Component
 export default class Project extends Vue {
   data = [];
   dataLoaded = false;
-  error = "";
+  error = '';
   query = this.$store.state.search;
 
   async created(): Promise<void> {
     try {
       this.data = await ProjectService.getProject();
-      this.$store.commit("setRecords", this.data);
+      this.$store.commit('setRecords', this.data);
       this.dataLoaded = true;
       getLightboxCode();
       animateLogo('logo-image', '');
@@ -71,18 +71,39 @@ export default class Project extends Vue {
 
   mounted(): void {
     animateLogo('logo-image', 'spin');
-
-    const titleEl = document.querySelector("head title");
-    if (titleEl) {
-      titleEl.textContent = "Project Samples | Chris Corchado";
-    }
+    this.updateMeta();
   }
 
-  updated(): void{
+  updateMeta(): void {
+    const titleEl = document.querySelector('head title');
+    if (titleEl) {
+      titleEl.textContent = 'Project Samples | Chris Corchado';
+    }
+
+    const descEl = document.querySelector("[name='description']");
+    if (descEl) {
+      descEl.remove();
+    }
+
+    const desc = document.createElement('meta');
+    desc.setAttribute('name', 'description');
+    desc.setAttribute(
+      'content',
+      'Project samples to showcase some of my programming, design and animation skills'
+    );
+    document.getElementsByTagName('head')[0].appendChild(desc);
+  }
+
+  updated(): void {
     if (this.data.length == 0) {
-      noRecordsFound('no-records', this.$store.state.search, 'navigation', 'No matches found for')
+      noRecordsFound(
+        'no-records',
+        this.$store.state.search,
+        'navigation',
+        'No matches found for'
+      );
     } else {
-      noRecordsFound('no-records', '', 'navigation', 'No matches found for')
+      noRecordsFound('no-records', '', 'navigation', 'No matches found for');
     }
   }
 
@@ -93,11 +114,11 @@ export default class Project extends Vue {
 
   setScreenshots(item: string): Record<string, unknown> {
     // @ts-ignore
-    return item.split(",");
+    return item.split(',');
   }
 
   setScreenshotClass(itemCount: string): string {
-    return "project-item-grid project-items" + itemCount;
+    return 'project-item-grid project-items' + itemCount;
   }
 
   encodeVideoName(urlParam: string, fileName: string): string {
@@ -110,7 +131,7 @@ export default class Project extends Vue {
 
   highlightSearch = highlightSearch;
 
-  @Watch("$route")
+  @Watch('$route')
   async onPropertyChanged(value: Record<string, []>): Promise<void> {
     this.data = await ProjectService.getProject(
       // @ts-ignore
@@ -118,12 +139,12 @@ export default class Project extends Vue {
       this.$route.query.dir,
       this.$store.state.search
     );
-    this.$store.commit("setRecords", this.data);
+    this.$store.commit('setRecords', this.data);
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "./../../scss/pages/project.scss";
-@import "./../../scss/header/search.scss";
+@import './../../scss/pages/project.scss';
+@import './../../scss/header/search.scss';
 </style>

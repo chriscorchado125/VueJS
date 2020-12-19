@@ -12,23 +12,23 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
-import HomeService from "./../../services/HomeService";
-import animateLogo from "./../../ts/animateLogo";
+import HomeService from './../../services/HomeService';
+import animateLogo from './../../ts/animateLogo';
 
 @Component
 export default class Home extends Vue {
   data: Array<unknown> = [];
   dataLoaded = false;
-  error = "";
-  homeDescription = "";
+  error = '';
+  homeDescription = '';
 
   async created(): Promise<void> {
     try {
       this.data = await HomeService.getHome();
-      this.$store.commit("setRecords", this.data);
+      this.$store.commit('setRecords', this.data);
       // @ts-ignore
       this.homeDescription = this.data[0].home.description;
       this.dataLoaded = true;
@@ -40,15 +40,31 @@ export default class Home extends Vue {
 
   mounted(): void {
     animateLogo('logo-image', 'spin');
+    this.updateMeta();
+  }
 
-    const titleEl = document.querySelector("head title");
+  updateMeta(): void {
+    const titleEl = document.querySelector('head title');
     if (titleEl) {
-      titleEl.textContent = "About Me | Chris Corchado";
+      titleEl.textContent = 'About Me | Chris Corchado';
     }
+
+    const descEl = document.querySelector("[name='description']");
+    if (descEl) {
+      descEl.remove();
+    }
+
+    const desc = document.createElement('meta');
+    desc.setAttribute('name', 'description');
+    desc.setAttribute(
+      'content',
+      'Accessibility minded full stack web developer with a graphic design background that enjoys problem solving, learning, ideating and creating.'
+    );
+    document.getElementsByTagName('head')[0].appendChild(desc);
   }
 }
 </script>
 
 <style lang="scss">
-@import "./../../scss/pages/home.scss";
+@import './../../scss/pages/home.scss';
 </style>

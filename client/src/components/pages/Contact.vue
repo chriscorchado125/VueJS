@@ -14,23 +14,23 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
-import ContactService from "./../../services/ContactService";
-import animateLogo from "./../../ts/animateLogo";
+import ContactService from './../../services/ContactService';
+import animateLogo from './../../ts/animateLogo';
 
 @Component
 export default class Contact extends Vue {
   data = [];
   dataLoaded = false;
-  error = "";
-  formHTML = "";
+  error = '';
+  formHTML = '';
 
   async created(): Promise<void> {
     try {
       this.data = await ContactService.getContact();
-      this.$store.commit("setRecords", this.data);
+      this.$store.commit('setRecords', this.data);
       // @ts-ignore
       this.formHTML = this.getForm(this.data.data);
       this.dataLoaded = true;
@@ -42,15 +42,28 @@ export default class Contact extends Vue {
 
   mounted(): void {
     animateLogo('logo-image', 'spin');
+    this.updateMeta();
+  }
 
-    const titleEl = document.querySelector("head title");
+  updateMeta(): void {
+    const titleEl = document.querySelector('head title');
     if (titleEl) {
-      titleEl.textContent = "Contact Me | Chris Corchado";
+      titleEl.textContent = 'Contact Me | Chris Corchado';
     }
+
+    const descEl = document.querySelector("[name='description']");
+    if (descEl) {
+      descEl.remove();
+    }
+
+    const desc = document.createElement('meta');
+    desc.setAttribute('name', 'description');
+    desc.setAttribute('content', 'Contact me if you have any question or comments');
+    document.getElementsByTagName('head')[0].appendChild(desc);
   }
 
   updated(): void {
-    const emailField = document.getElementById("edit-mail");
+    const emailField = document.getElementById('edit-mail');
     if (emailField) {
       emailField.focus();
     }
@@ -60,12 +73,12 @@ export default class Contact extends Vue {
     // @ts-ignore
     let form = data.substr(
       // @ts-ignore
-      data.indexOf("<form class="),
+      data.indexOf('<form class='),
       // @ts-ignore
-      data.indexOf("</form>")
+      data.indexOf('</form>')
     );
-    form = form.substr(0, form.indexOf("</form>") + 8);
-    form = form.replace("Your email address", "Email");
+    form = form.substr(0, form.indexOf('</form>') + 8);
+    form = form.replace('Your email address', 'Email');
 
     // get the contact form JavaScript
     const scriptString =
@@ -76,9 +89,9 @@ export default class Contact extends Vue {
       // @ts-ignore
       data.indexOf(scriptString),
       // @ts-ignore
-      data.indexOf("><\/script>")
+      data.indexOf('><\/script>')
     );
-    script = script.substr(0, script.indexOf("<\/script>") + 9);
+    script = script.substr(0, script.indexOf('<\/script>') + 9);
 
     return `${form} ${script}`;
   }
@@ -86,5 +99,5 @@ export default class Contact extends Vue {
 </script>
 
 <style lang="scss">
-@import "./../../scss/pages/contact.scss";
+@import './../../scss/pages/contact.scss';
 </style>
