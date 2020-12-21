@@ -22,11 +22,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Watch } from 'vue-property-decorator';
 
-import SitePagination from "@/components/SitePagination.vue";
+import SitePagination from '@/components/SitePagination.vue';
 
 @Component({
   components: {
@@ -34,8 +34,8 @@ import SitePagination from "@/components/SitePagination.vue";
   },
 })
 export default class Search extends Vue {
-  searchFor = "";
-  containerStyle = "pagination-no";
+  searchFor = '';
+  containerStyle = 'pagination-no';
 
   mounted(): void {
     this.setContainerStyle();
@@ -55,21 +55,21 @@ export default class Search extends Vue {
       this.$store.state.pageRecordCount == this.$store.state.maxRecords ||
       this.$store.state.pageNum > 1
     ) {
-      this.containerStyle = "pagination-yes";
+      this.containerStyle = 'pagination-yes';
     } else {
-      this.containerStyle = "pagination-no";
+      this.containerStyle = 'pagination-no';
     }
   }
 
   searchFilter(): void {
-    this.searchFor = this.searchFor.replace(/[^A-Z]/gi, "");
-    this.$store.commit("setSearchedFor", this.searchFor);
+    this.searchFor = this.searchFor.replace(/[^A-Z]/gi, '');
+    this.$store.commit('setSearchedFor', this.searchFor);
   }
 
   clearSearch(): void {
-    this.searchFor = "";
-    this.$store.commit("setSearchedFor", "");
-    this.$store.commit("setPageNum", 1);
+    this.searchFor = '';
+    this.$store.commit('setSearchedFor', '');
+    this.$store.commit('setPageNum', 1);
 
     this.$router.push({ path: this.$route.path }).catch((err) => {
       console.log(err);
@@ -78,31 +78,33 @@ export default class Search extends Vue {
 
   search(): void {
     this.searchFor = this.$store.state.search;
-    this.$store.commit("setPageNum", 1);
+    this.$store.commit('setPageNum', 1);
+
+    ga('send', 'pageview', `/${this.$route.path}?q=${this.searchFor}`);
 
     this.$router
-      .push({ path: this.$route.path + "?q=" + this.searchFor })
+      .push({ path: this.$route.path + '?q=' + this.searchFor })
       .catch((err) => {
         console.log(err);
       });
   }
 
   // search data
-  @Watch("$route")
+  @Watch('$route')
   async onPropertyChanged(
     value: Record<string, unknown>,
     oldValue: Record<string, unknown>
   ): Promise<void> {
     // clear search when navigating between pages - name is the route
     if (value.name !== oldValue.name) {
-      this.searchFor = "";
-      this.$store.commit("setSearchedFor", "");
+      this.searchFor = '';
+      this.$store.commit('setSearchedFor', '');
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "./../../src/scss/header/search.scss";
-@import "./../../src/scss/header/pagination.scss";
+@import './../../src/scss/header/search.scss';
+@import './../../src/scss/header/pagination.scss';
 </style>
