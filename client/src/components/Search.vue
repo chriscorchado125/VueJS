@@ -6,7 +6,7 @@
 
     label(for="search-site")
       span.screen-reader "Enter Search Term"
-      input(@keyup="searchFilter()" v-model="searchFor" @focus="$event.target.select()" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
+      input(@keyup="searchFilter()" v-model="searchFor" @focus="$event.target.select()" ref="search" type="search" id="search-site" name="search_api" aria-label="Enter search term" aria-required="true"
           placeholder="Search items" maxlength="128")
 
     label(for="search-submit")
@@ -39,10 +39,15 @@ export default class Search extends Vue {
 
   mounted(): void {
     this.setContainerStyle();
+    this.selectInputText();
   }
 
   updated(): void {
     this.setContainerStyle();
+  }
+
+  selectInputText(): void {
+    // this.$refs.search.select();
   }
 
   setContainerStyle(): void {
