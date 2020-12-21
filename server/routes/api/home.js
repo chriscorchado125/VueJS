@@ -9,8 +9,8 @@ router.get('/', async (req, res) => {
   const home = await loadHomeData()
   const dataToReturn = await home.find({}).toArray()
 
-  res.cookie('recordCount', dataToReturn.length)
-  res.cookie('maxItemsPerPage', MAX_ITEMS_PER_PAGE)
+  res.cookie('recordCount', dataToReturn.length, { sameSite: 'None', secure: true })
+  res.cookie('maxItemsPerPage', MAX_ITEMS_PER_PAGE, { sameSite: 'None', secure: true })
 
   res.send(dataToReturn)
 })

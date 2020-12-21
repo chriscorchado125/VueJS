@@ -68,21 +68,21 @@ router.get('/', async (req, res) => {
 
   if (dataToReturn.length > 0) {
     if (dataToReturn.length > MAX_ITEMS_PER_PAGE) {
-      res.cookie('nextLink', 'true')
+      res.cookie('nextLink', 'true', { sameSite: 'None', secure: true })
       dataToReturn.pop()
     } else {
-      res.cookie('nextLink', 'false')
+      res.cookie('nextLink', 'false', { sameSite: 'None', secure: true })
     }
 
     firstID = Object.values(dataToReturn)[0]._id
     lastID = Object.values(dataToReturn)[Object.keys(dataToReturn).length - 1]._id
 
-    res.cookie('firstIDcookie', firstID)
-    res.cookie('lastIDcookie', lastID)
+    res.cookie('firstIDcookie', firstID, { sameSite: 'None', secure: true })
+    res.cookie('lastIDcookie', lastID, { sameSite: 'None', secure: true })
   }
 
-  res.cookie('recordCount', dataToReturn.length)
-  res.cookie('maxItemsPerPage', MAX_ITEMS_PER_PAGE)
+  res.cookie('recordCount', dataToReturn.length, { sameSite: 'None', secure: true })
+  res.cookie('maxItemsPerPage', MAX_ITEMS_PER_PAGE, { sameSite: 'None', secure: true })
 
   res.send(dataToReturn)
 })

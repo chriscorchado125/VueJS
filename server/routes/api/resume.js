@@ -9,8 +9,8 @@ router.get('/', async (req, res) => {
   const resume = await loadResumeData()
   const dataToReturn = await resume.find({}).toArray()
 
-  res.cookie('recordCount', dataToReturn.length)
-  res.cookie('maxItemsPerPage', MAX_ITEMS_PER_PAGE)
+  res.cookie('recordCount', dataToReturn.length, { sameSite: 'None', secure: true })
+  res.cookie('maxItemsPerPage', MAX_ITEMS_PER_PAGE, { sameSite: 'None', secure: true })
 
   res.send(dataToReturn)
 })
