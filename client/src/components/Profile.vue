@@ -13,8 +13,8 @@
         span LinkedIn
 
     div#profile-profile.icon
-      a(href="https://docs.microsoft.com/en-us/users/corchadochrisit-2736/" target="_blank" rel="noopener" title="Opening a new window")
-        img(alt="Link to Azure Profile" src="https://chriscorchado.com/images/azureIcon.jpg")
+      a(href="https://chriscorchado.com/resume/ChrisCorchadoIT-2736_microsoft-en-us-users.pdf" target="_blank" rel="noopener" title="Opening a new window")
+        img(alt="Link to Azure Profile PDF" src="https://chriscorchado.com/images/azureIcon.jpg")
         span Azure
 
 </template>
