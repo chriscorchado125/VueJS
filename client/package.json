@@ -14,7 +14,7 @@
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@types/jquery": "^3.5.5",
-    "axios": "^0.21.0",
+    "axios": "^0.26.1",
     "core-js": "^3.8.1",
     "jquery": "^3.5.1",
     "node-forge": "^0.10.0",
@@ -50,7 +50,7 @@
     "eslint-plugin-react-hooks": "^4.0.0",
     "eslint-plugin-vue": "^7.2.0",
     "prettier": "^2.2.1",
-    "pug": "^3.0.0",
+    "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
