@@ -80,7 +80,7 @@ export default class Search extends Vue {
     this.searchFor = this.$store.state.search;
     this.$store.commit('setPageNum', 1);
 
-    ga('send', 'pageview', `/${this.$route.path}?q=${this.searchFor}`);
+    // ga('send', 'pageview', `/${this.$route.path}?q=${this.searchFor}`);
 
     this.$router
       .push({ path: this.$route.path + '?q=' + this.searchFor })
